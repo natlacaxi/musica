@@ -1,7 +1,7 @@
 {
-  "name": "{{SITE_NAME}}",
-  "short_name": "{{SITE_NAME}}",
-  "description": "{{SITE_NAME}} — ta musique, partout.",
+  "name": "TalcoMusic",
+  "short_name": "TalcoMusic",
+  "description": "TalcoMusic — ta musique, partout.",
   "id": "./",
   "start_url": "./",
   "scope": "./",

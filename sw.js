@@ -1,5 +1,5 @@
 // Service worker TalcoMusic : installation (PWA), démarrage hors ligne, mise à jour proposée à l'utilisateur.
-const VERSION = 'v3';
+const VERSION = 'v5';
 const CACHE = 'talcomusic-' + VERSION;      // fichiers du site
 const EXT = 'talcomusic-ext-v1';            // SDK Firebase (version figée) + polices Google
 const SHELL = ['./', 'index.html', 'offline.html', 'manifest.webmanifest',

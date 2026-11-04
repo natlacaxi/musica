@@ -1,23 +1,19 @@
 
 <!DOCTYPE html>
-<!-- {{SITE_NAME}} : accès protégé par Firebase Auth (projet exchange-f4322). Le nom du site vient de la variable GitHub SITE_NAME (voir README.md). -->
+<!-- TalcoMusic : accès protégé par Firebase Auth (projet exchange-f4322). Le nom du site vient de la variable GitHub SITE_NAME (voir README.md). -->
 <html lang="fr">
     <head>
         <script>window._d = window._d || function (s) { return atob(s); };</script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-        <title>{{SITE_NAME}} — Musique en ligne</title>
-        <meta name="site-name" content="{{SITE_NAME}}">
-        <meta name="description" content="{{SITE_NAME}} : écoute ta musique en ligne, crée tes playlists et installe l’appli sur ton téléphone.">
+        <title>TalcoMusic — Musique en ligne</title>
+        <meta name="site-name" content="TalcoMusic">
+        <meta name="description" content="TalcoMusic : écoute ta musique en ligne, crée tes playlists et installe l’appli sur ton téléphone.">
         <meta name="robots" content="index,follow,max-image-preview:large">
-        <link rel="canonical" href="{{SITE_URL}}">
-        <meta name="google-site-verification" content="{{GOOGLE_SITE_VERIFICATION}}">
         <meta property="og:type" content="website">
-        <meta property="og:site_name" content="{{SITE_NAME}}">
-        <meta property="og:title" content="{{SITE_NAME}} — Musique en ligne">
+        <meta property="og:site_name" content="TalcoMusic">
+        <meta property="og:title" content="TalcoMusic — Musique en ligne">
         <meta property="og:description" content="Écoute ta musique, crée tes playlists et installe l’appli sur ton téléphone.">
-        <meta property="og:url" content="{{SITE_URL}}">
-        <meta property="og:image" content="{{SITE_URL}}icon-512.png">
         <meta property="og:locale" content="fr_FR">
         <meta name="twitter:card" content="summary">
         <meta name="color-scheme" content="dark">
@@ -26,12 +22,12 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-        <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"{{SITE_NAME_JSON}}","url":"{{SITE_URL}}","applicationCategory":"MultimediaApplication","operatingSystem":"Web, iOS, Android","inLanguage":"fr","description":"Lecteur de musique en ligne avec playlists, installable sur mobile.","image":"{{SITE_URL}}icon-512.png"}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"TalcoMusic","applicationCategory":"MultimediaApplication","operatingSystem":"Web, iOS, Android","inLanguage":"fr","description":"Lecteur de musique en ligne avec playlists, installable sur mobile."}</script>
         <meta name="theme-color" content="#0d0614">
-        <meta name="application-name" content="{{SITE_NAME}}">
+        <meta name="application-name" content="TalcoMusic">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-title" content="{{SITE_NAME}}">
+        <meta name="apple-mobile-web-app-title" content="TalcoMusic">
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
         <link rel="manifest" href="manifest.webmanifest">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -3579,17 +3575,23 @@ button{-webkit-user-select:none;user-select:none}
           function showInstall(on) {
             var b = $('gearInstall');
             if (b) b.style.display = on ? '' : 'none';
+            var t = $('installBtn');
+            if (t) t.style.display = on ? '' : 'none';
           }
           window.talcoInstallApp = function () {
-            if (deferred) { deferred.prompt(); deferred.userChoice.then(function () { deferred = null; showInstall(false); }); }
+            if (deferred) {
+              deferred.prompt();
+              deferred.userChoice.then(function (r) { deferred = null; if (r && r.outcome === 'accepted') showInstall(false); });
+            }
             else if (ios) { alert('Sur iPhone / iPad : touche le bouton Partager, puis « Sur l’écran d’accueil ».'); }
+            else { alert('Pour installer l’app : ouvre le menu de ton navigateur (⋮ ou ⋯) puis choisis « Installer l’application » ou « Ajouter à l’écran d’accueil ».'); }
           };
           window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; showInstall(true); });
           window.addEventListener('appinstalled', function () { deferred = null; showInstall(false); });
           document.addEventListener('DOMContentLoaded', function () {
             var n = window.SITE_NAME || 'TalcoMusic';
             document.querySelectorAll('[data-site-name]').forEach(function (el) { el.textContent = n; });
-            if (ios && !standalone) showInstall(true);
+            if (!standalone) showInstall(true);
             if (window.top === window) {
               document.querySelectorAll('.gear-menu-item').forEach(function (el) {
                 if ((el.getAttribute('onclick') || '').indexOf('openModule') !== -1) el.style.display = 'none';
@@ -3665,6 +3667,7 @@ button{-webkit-user-select:none;user-select:none}
                     </div>
                 </div>
                 <div class="topbar-right">
+                    <button class="icon-btn install-btn" id="installBtn" style="display:none" onclick="window.talcoInstallApp&&window.talcoInstallApp()" title="Installer l’app" aria-label="Installer l’app"><span aria-hidden="true">📲</span><span class="install-txt">Installer</span></button>
                     <button class="icon-btn" id="quickSearchBtn" onclick="openSearch()" title="Rechercher">
                         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <circle cx="11" cy="11" r="8"/>
@@ -6554,7 +6557,68 @@ const TRACKS = [];
         </script>
     
 <!-- LEGAL-BAR -->
-<div id="itn-legal-bar" style="position:fixed;right:8px;bottom:calc(6px + env(safe-area-inset-bottom,0px));z-index:2147483000;font:11px/1.3 system-ui,-apple-system,'Segoe UI',sans-serif;background:rgba(10,10,18,.82);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:4px 11px;white-space:nowrap;max-width:calc(100vw - 16px);overflow:hidden"><a href="../legal/confidentialite.html" target="_blank" rel="noopener" style="color:#d6d4ee;text-decoration:none">Confidentialité</a> · <a href="../legal/conditions-utilisation.html" target="_blank" rel="noopener" style="color:#d6d4ee;text-decoration:none">Conditions</a> · <a href="../legal/mentions-legales.html" target="_blank" rel="noopener" style="color:#d6d4ee;text-decoration:none">Mentions légales</a> · <a href="../legal/cookies.html" target="_blank" rel="noopener" style="color:#d6d4ee;text-decoration:none">Cookies</a></div>
+<style>
+.install-btn{width:auto;gap:6px;padding:0 12px;font:600 13px/1 Inter,system-ui,sans-serif;display:inline-flex;align-items:center;white-space:nowrap}
+@media (max-width:640px){.install-btn .install-txt{display:none}.install-btn{padding:0 10px}}
+#itn-legal-bar{position:fixed;right:8px;bottom:calc(6px + env(safe-area-inset-bottom,0px));z-index:2147483000;font:11px/1.3 system-ui,-apple-system,'Segoe UI',sans-serif;background:rgba(10,10,18,.82);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:5px 12px;white-space:nowrap;max-width:calc(100vw - 16px);overflow:hidden;text-overflow:ellipsis;color:#d6d4ee}
+#itn-legal-bar button{all:unset;cursor:pointer;color:#d6d4ee;text-decoration:underline;text-underline-offset:2px}
+#itn-legal-bar button:focus-visible{outline:2px solid #b794f6;border-radius:4px}
+#itn-legal{position:fixed;inset:0;z-index:2147483001;display:none;align-items:center;justify-content:center;padding:max(12px,env(safe-area-inset-top,0px)) 12px max(12px,env(safe-area-inset-bottom,0px));background:rgba(5,2,10,.72);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+#itn-legal.open{display:flex}
+#itn-legal .box{width:min(640px,100%);max-height:100%;overflow:auto;background:#150b22;color:#e9e6f5;border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:20px 20px 16px;font:14px/1.55 Inter,system-ui,sans-serif;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+#itn-legal h2{margin:0 0 4px;font:800 20px/1.2 Sora,Inter,system-ui,sans-serif}
+#itn-legal h3{margin:16px 0 4px;font:700 14px/1.3 Sora,Inter,system-ui,sans-serif;color:#c9b3f5}
+#itn-legal p,#itn-legal li{margin:4px 0;color:#d6d4ee}
+#itn-legal ul{padding-left:18px;margin:4px 0}
+#itn-legal a{color:#b794f6}
+#itn-legal .x{float:right;margin:-6px -6px 0 8px;width:36px;height:36px;border:0;border-radius:50%;background:rgba(255,255,255,.08);color:#fff;font-size:20px;cursor:pointer}
+#itn-legal .meta{font-size:12px;color:#9c97b8;margin-top:14px}
+.logo-wrap{cursor:pointer;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+</style>
+<div id="itn-legal-bar"><button type="button" data-legal="conditions">Conditions</button> · <button type="button" data-legal="mentions">Mentions légales</button> · <span>© TalcoINC2026</span></div>
+<div id="itn-legal" role="dialog" aria-modal="true" aria-labelledby="itnLegalTitle" aria-hidden="true">
+  <div class="box">
+    <button class="x" type="button" id="itnLegalClose" aria-label="Fermer">×</button>
+    <h2 id="itnLegalTitle">Conditions &amp; mentions</h2>
+    <h3>Mentions légales</h3>
+    <ul>
+      <li>Site : TalcoMusic</li>
+      <li>Éditeur : TalcoITN · TalcoIT-Networks</li>
+      <li>Administration : TalcoAdministration</li>
+      <li>Contact : <a href="mailto:talcoitn@gmail.com">talcoitn@gmail.com</a></li>
+      <li>© TalcoINC2026 — tous droits réservés</li>
+    </ul>
+    <h3>Conditions d’utilisation</h3>
+    <ul>
+      <li>TalcoMusic est un site de musique ouvert à tous, installable comme application.</li>
+      <li>Les comptes fonctionnent avec un code personnel : garde-le secret, il donne accès à tes playlists.</li>
+      <li>Les contenus (musiques, paroles, visuels) restent la propriété de leurs ayants droit. Toute reproduction ou diffusion non autorisée est interdite.</li>
+      <li>Tu t’engages à ne pas perturber le service, ni tenter d’accéder aux données d’autres utilisateurs.</li>
+      <li>TalcoAdministration peut modifier, suspendre ou supprimer un compte ou un contenu en cas d’abus, et faire évoluer le service ou ces conditions à tout moment.</li>
+      <li>Le service est fourni « tel quel », sans garantie de disponibilité continue.</li>
+    </ul>
+    <h3>Données</h3>
+    <p>Le site enregistre uniquement ce qui est nécessaire à son fonctionnement (compte par code, playlists, messages envoyés à l’administrateur). Pour toute demande, écris à <a href="mailto:talcoitn@gmail.com">talcoitn@gmail.com</a>.</p>
+    <p class="meta">TalcoITN · TalcoIT-Networks · TalcoAdministration · TalcoINC2026</p>
+  </div>
+</div>
+<script>
+(function(){
+  var m=document.getElementById('itn-legal'); if(!m) return;
+  function open(){ m.classList.add('open'); m.setAttribute('aria-hidden','false'); var c=document.getElementById('itnLegalClose'); if(c) c.focus(); }
+  function close(){ m.classList.remove('open'); m.setAttribute('aria-hidden','true'); }
+  window.talcoOpenLegal=open;
+  document.querySelectorAll('#itn-legal-bar [data-legal]').forEach(function(b){ b.addEventListener('click',open); });
+  document.getElementById('itnLegalClose').addEventListener('click',close);
+  m.addEventListener('click',function(e){ if(e.target===m) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+  // Double clic / double tap sur le logo TalcoMusic
+  var logo=document.querySelector('.logo-wrap'), last=0;
+  if(logo) logo.addEventListener('click',function(){
+    var n=Date.now(); if(n-last<450){ last=0; open(); } else last=n;
+  });
+})();
+</script>
 <!-- /LEGAL-BAR -->
 </body>
 </html>
