@@ -27,3 +27,15 @@ Hors ligne (`sw.js`, `offline.html`), mise à jour proposée à chaque déploiem
 
 ## Pistes
 `TRACKS` contient 409 titres (fichier 411_tracks.txt, doublon retiré). Colonne Date = date d'ajout Cloudinary ; ajoute `date: '2024-05-01'` à un titre pour la remplacer.
+
+## Administrateur
+Le compte dont le code est celui de l'admin (crée-le EN PREMIER sur le site, avant tout le monde) voit et supprime **toutes** les playlists (perso de chacun + partagées) et lit les messages. Les droits réels viennent des règles Firestore : voir `firestore-rules-a-fusionner.txt` (hors dépôt public).
+
+## Création de compte : checklist Firebase (exchange-f4322)
+1. Authentication → Sign-in method → **E-mail/Mot de passe** : activé.
+2. Authentication → Paramètres → **Domaines autorisés** : ajoute `natlacaxi.github.io` (et ton domaine perso s'il y en a un).
+3. Firestore Database créé, règles du fichier `firestore-rules-a-fusionner.txt` fusionnées (sans écraser les règles des autres services).
+Le site affiche maintenant l'erreur Firebase exacte si la création échoue.
+
+## Interface
+Toutes les fenêtres sont en plein écran ; manifest en `fullscreen`. Artistes : cases uniquement au-delà de 6 titres. Date = année de sortie (renseignée pour ~150 titres, `—` sinon ; ajoute `year: 2021` ou `date: '2021-05-01'` dans `TRACKS`).
