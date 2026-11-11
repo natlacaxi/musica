@@ -27,11 +27,11 @@ jobs:
         env:
           # Variables GitHub : Settings → Secrets and variables → Actions → Variables
           SITE_NAME: ${{ vars.SITE_NAME || 'TalcoMusic' }}
-          GOOGLE_SITE_VERIFICATION: ${{ vars.GOOGLE_SITE_VERIFICATION }}  # optionnel : code Search Console
+          GOOGLE_SITE_VERIFICATION: ${{ vars.GOOGLE_SITE_VERIFICATION || 'TUBi6xTFf23UYii6oMmOaSj-DRsPRPsgWL4_IAmncho' }}  # code Search Console (modifiable via la variable GitHub)
           SITE_URL: ${{ steps.pages.outputs.base_url }}
         run: |
           mkdir -p _site
-          cp index.html offline.html manifest.webmanifest sw.js *.png *.ico _site/
+          cp index.html offline.html manifest.webmanifest sw.js *.png *.ico google*.html _site/
           python3 - <<'PY'
           import os, re, json, html, pathlib, datetime
           name = os.environ["SITE_NAME"]
