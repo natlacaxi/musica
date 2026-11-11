@@ -1,7 +1,7 @@
 {
   "name": "TalcoMusic",
   "short_name": "TalcoMusic",
-  "description": "TalcoMusic — ta musique, partout.",
+  "description": "TalcoMusic (MusiqueTalco, TM) — lecteur de musique en ligne TalcoITN : playlists, paroles, mode sombre, appli installable.",
   "id": "./",
   "start_url": "./",
   "scope": "./",

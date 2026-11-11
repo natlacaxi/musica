@@ -42,3 +42,18 @@ Toutes les fenêtres sont en plein écran ; manifest en `fullscreen`. Artistes :
 
 ## Compte connecté
 Menu ⚙️ → **Mon compte** : 🎨 Personnaliser (nom affiché en haut, couleur, fond d'écran ou photo — collection `profiles`), 💬 messagerie avec l'admin (l'admin répond depuis « Messages reçus »), ✏️ personnalisation des playlists (nom, emoji, couleur). Code admin : celui dont l'empreinte est `ADMIN_EMAIL` dans `index.html`.
+
+## Conditions, cookies, confidentialité (en local)
+Écran d'acceptation obligatoire au premier chargement (`talcoConsent_v1` dans localStorage). Sans acceptation : aucune ressource Google (Firebase, polices) n'est chargée et l'accès est bloqué. Les liens du pied de page ouvrent le même texte (modifie `TERMS` dans `index.html`). Mon profil → « Supprimer mon compte et mes données » efface profil, playlists et messages.
+
+## Pochettes et dates
+Pochettes et années cherchées via iTunes en arrière-plan (cache `talcoMeta_v1`) ; emoji conservé si rien n'est trouvé.
+
+## Fond d'écran par défaut
+Image portrait / paysage (Cloudinary) selon l'orientation (variables `--wall-p` / `--wall-l` dans le CSS). Remplacée par le fond choisi dans Mon profil → Fond.
+
+## Artistes
+Photos : Deezer puis Wikipédia (cache `talcoArtistPics_v2`). Playlists d'artistes : à partir de 3 titres (`ARTIST_PL_MIN`).
+
+## Google Search Console
+Deux méthodes de vérification sont en place : le fichier `google55bbd5b30df839a5.html` (copié par le workflow à la racine du site) et la balise `google-site-verification` dans `index.html`. Ensuite, dans Search Console : « Sitemaps » → ajouter `sitemap.xml` (généré automatiquement avec `robots.txt` à chaque déploiement). Données structurées (JSON-LD) : TalcoMusic, GroupeTalco et leurs noms alternatifs (MusiqueTalco, TM, TalcoITN, ITNB Talco…).
