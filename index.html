@@ -3709,6 +3709,146 @@ button{-webkit-tap-highlight-color:transparent}
 .pf-row span{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}.pf-row b{font-size:.92rem}.pf-row small{color:var(--muted);font-size:.76rem}.pf-row em{font-style:normal;font-size:1.5rem;opacity:.5}
 .pf-row.danger{border-color:rgba(251,113,133,.45)}.pf-row.danger i{background:rgba(251,113,133,.28)}
 @media(max-width:420px){.pf-ems{grid-template-columns:repeat(6,1fr)}.pf-card{padding:1.1rem}.pf-av{width:76px;height:76px;font-size:2.2rem}.pf-tiles{grid-template-columns:repeat(4,1fr)}}
+
+/* ═════ v6 : disposition façon Apple Music ═════ */
+.clock-widget,#tCur,#tTot,.mp-prog-time,#sbTotalDuration,.at-total-duration{display:none!important}
+.app{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:calc(60px + env(safe-area-inset-top)) minmax(0,1fr)!important}
+.topbar{grid-column:1/-1!important;grid-row:1!important;display:flex!important;align-items:center;justify-content:space-between;padding:env(safe-area-inset-top) max(.9rem,env(safe-area-inset-right)) 0 max(.9rem,env(safe-area-inset-left))!important;gap:.6rem}
+.topbar .sb-toggle,.topbar #quickSearchBtn,.topbar .gear-wrap{display:none!important}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:.5rem}
+.logo-text .sub{display:none}
+@media(min-width:760px){.logo-text .sub{display:block}}
+.who-chip,.who-chip[hidden]{display:inline-flex!important;align-items:center;justify-content:center;width:44px;height:44px;max-width:none;padding:0!important;border-radius:50%!important;overflow:hidden}
+.who-chip .who-av{width:100%;height:100%;font-size:1.3rem;background-color:rgba(255,255,255,.1)}
+.main{grid-column:1!important;grid-row:2!important;padding:12px 14px calc(172px + env(safe-area-inset-bottom))!important}
+.sidebar{display:none!important}
+.overlay .sheet{padding-bottom:calc(170px + env(safe-area-inset-bottom))!important}
+/* 16:9 / paysage : la liste des musiques apparaît à droite */
+@media (min-width:760px) and (min-aspect-ratio:4/3){
+  .app{grid-template-columns:minmax(0,1fr) 380px!important}
+  .sidebar{display:flex!important;grid-column:2!important;grid-row:2!important;border-left:1px solid var(--glass-b)!important;border-right:0!important;box-shadow:none!important;padding-bottom:0}
+  .sidebar .sb-nav{display:none}
+  #tabbar,.mini-player{right:calc(380px + 16px)!important}
+}
+/* mini-lecteur flottant + barre d'onglets en verre */
+.mini-player{position:fixed!important;left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom) + 80px);height:64px!important;max-width:760px;margin-inline:auto;grid-column:auto!important;padding:0 12px!important;border-radius:calc(26px*var(--rad))!important;border:1px solid var(--glass-b)!important;background:linear-gradient(180deg,rgba(255,255,255,calc(.16*var(--ga))),rgba(255,255,255,calc(.06*var(--ga))))!important;backdrop-filter:blur(var(--gb)) saturate(170%)!important;-webkit-backdrop-filter:blur(var(--gb)) saturate(170%)!important;box-shadow:0 18px 40px -14px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.28)!important;z-index:2147482400;gap:.7rem}
+.mini-player .mp-art{width:46px;height:46px}
+.mini-player .mp-info{flex:1;min-width:0}
+.mini-player .mp-center{flex:none}
+.mini-player .mp-prog-wrap{position:absolute;left:22px;right:22px;bottom:4px;height:3px;margin:0}
+.mini-player .mp-prog{height:3px!important}
+@media(max-width:759px){.mini-player .mp-right{display:none}.mini-player .mp-cbtn:first-child{display:none}}
+#tabbar{position:fixed;left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom) + 8px);max-width:760px;margin-inline:auto;height:64px;display:flex;align-items:stretch;gap:2px;padding:5px;border-radius:calc(32px*var(--rad));border:1px solid var(--glass-b);background:linear-gradient(180deg,rgba(255,255,255,calc(.18*var(--ga))),rgba(255,255,255,calc(.07*var(--ga))));backdrop-filter:blur(var(--gb)) saturate(180%);-webkit-backdrop-filter:blur(var(--gb)) saturate(180%);box-shadow:0 20px 50px -14px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.3);z-index:2147482500}
+#tabbar button{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:0;background:none;color:rgba(255,255,255,.62);border-radius:calc(26px*var(--rad));font-family:inherit;font-size:10px;font-weight:600;line-height:1;cursor:pointer;padding:0 2px;transition:background .2s,color .2s}
+#tabbar button svg{width:24px;height:24px}
+#tabbar button span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#tabbar button.on{color:var(--c2);background:rgba(255,255,255,calc(.14*var(--ga)));box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+.no-consent #tabbar,.no-consent .mini-player{display:none!important}
+body:has(#npOverlay.active) #tabbar,body:has(#npOverlay.active) .mini-player{display:none!important}
+/* icônes bien arrondies */
+.tr-cov,.at-art,.sb-thumb,.mp-art,.pl-card-art{border-radius:calc(14px*var(--rad))!important;overflow:hidden}
+.logo-spin,.logo-spin img{border-radius:calc(15px*var(--rad))!important;overflow:hidden}
+.ar-pic,.pl2-cov.round,.who-av{border-radius:50%!important}
+.icon-btn,.sheet-nav-btn,.cbtn,.pbtn,.mp-cbtn,.mp-pbtn{border-radius:50%!important}
+.hero .art-box{border-radius:calc(28px*var(--rad))!important}
+.ar-pic{overflow:hidden}.ar-pic img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+html.compact .trow{padding-top:3px!important;padding-bottom:3px!important}html.compact .at-item{padding-top:4px!important;padding-bottom:4px!important}
+
+/* ═════ Ajout à une playlist, modales, playlists refaites ═════ */
+.at-add{flex:none;width:36px;height:36px;margin-left:auto;border-radius:50%;border:1px solid var(--glass-b);background:rgba(255,255,255,.08);color:#fff;font-size:1.15rem;line-height:1;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.at-add:hover{background:linear-gradient(135deg,var(--c1),var(--c2));border-color:transparent}
+.at-item{align-items:center}
+.tz-modal{position:fixed;inset:0;z-index:2147483300;display:flex;align-items:flex-end;justify-content:center;padding:1rem;background:rgba(3,3,6,.6);backdrop-filter:blur(calc(var(--gb)*.4));-webkit-backdrop-filter:blur(calc(var(--gb)*.4))}
+@media(min-width:700px){.tz-modal{align-items:center}}
+.tz-card{width:100%;max-width:430px;max-height:82dvh;overflow:auto;padding:1.3rem;border-radius:calc(28px*var(--rad));background:linear-gradient(180deg,rgba(40,40,58,.97),rgba(12,12,18,.99));border:1px solid var(--glass-b);box-shadow:0 30px 80px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.12);color:#f5f5f7}
+.tz-card h3{font:800 1.15rem 'Sora',sans-serif;margin-bottom:.6rem}
+.tz-p{color:var(--muted);font-size:.86rem;margin-bottom:.7rem}.tz-p b{color:#fff}
+.tz-card input[type=text],#tzName{width:100%;height:48px;padding:0 1rem;border-radius:14px;border:1px solid var(--glass-b);background:rgba(0,0,0,.3);color:#fff;font:inherit;outline:0;margin-bottom:.8rem}
+.tz-list{display:flex;flex-direction:column;gap:.4rem}
+.tz-row{display:flex;align-items:center;gap:.8rem;width:100%;padding:.7rem .8rem;border-radius:16px;border:1px solid var(--glass-b);background:rgba(255,255,255,.05);color:#fff;text-align:left;cursor:pointer;font-family:inherit}
+.tz-row:hover{background:rgba(255,255,255,.1)}
+.tz-row i{flex:none;width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--c1),var(--c2));font-style:normal;font-size:1.2rem}
+.tz-row span{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.tz-row b{font-size:.92rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tz-row small{color:var(--muted);font-size:.75rem}
+.tz-row em{font-style:normal;font-size:1.2rem;opacity:.7}.tz-row.on{border-color:rgba(52,211,153,.5)}.tz-row.on em{color:#34d399;opacity:1}
+.tz-act{display:flex;gap:.6rem;justify-content:flex-end;margin-top:1rem}
+.tz-sw{display:flex;align-items:center;gap:.8rem;cursor:pointer;font-size:.9rem;margin:.2rem 0 .4rem}.tz-sw input{display:none}.tz-sw i{position:relative;flex:none;width:50px;height:30px;border-radius:30px;background:rgba(255,255,255,.18);transition:.2s}.tz-sw i::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:.2s}.tz-sw input:checked+i{background:linear-gradient(135deg,var(--c1),var(--c2))}.tz-sw input:checked+i::after{left:23px}
+.tz-b{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:44px;padding:0 1.2rem;border:1px solid rgba(255,255,255,.18);border-radius:calc(16px*var(--rad));font-family:inherit;font-weight:700;font-size:.9rem;color:#fff;cursor:pointer;background:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.05));box-shadow:inset 0 1px 0 rgba(255,255,255,.18);transition:transform .15s,filter .2s}
+.tz-b.ok{background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 12px 28px -12px var(--c1),inset 0 1px 0 rgba(255,255,255,.32)}
+.tz-b.danger{background:rgba(251,113,133,.18);border-color:rgba(251,113,133,.5)}
+.tz-b:hover{filter:brightness(1.12)}.tz-b:active{transform:scale(.97)}
+.pl2-head{display:flex;align-items:center;justify-content:space-between;margin:.2rem 0 .9rem}.pl2-head h2{font:800 1.8rem 'Sora',sans-serif}
+.pl2-new{display:inline-flex;align-items:center;height:40px;padding:0 1.1rem;border:0;border-radius:100px;background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;font:700 .85rem inherit;font-family:inherit;cursor:pointer;box-shadow:0 10px 24px -10px var(--c1)}
+.pl2-seg{display:flex;gap:4px;padding:4px;border-radius:100px;background:var(--glass);border:1px solid var(--glass-b);margin-bottom:1.1rem}
+.pl2-seg button{flex:1;height:38px;border:0;border-radius:100px;background:none;color:rgba(255,255,255,.7);font:600 .8rem inherit;font-family:inherit;cursor:pointer}
+.pl2-seg button.on{background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;box-shadow:0 8px 20px -8px var(--c1)}
+.pl2-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:1.1rem .9rem}
+.pl2-card{display:flex;flex-direction:column;gap:.3rem;text-align:left;border:0;background:none;color:#fff;cursor:pointer;padding:0;font-family:inherit;min-width:0}
+.pl2-card b{font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pl2-card small{color:var(--muted);font-size:.74rem}
+.pl2-card .pl2-cov{transition:transform .25s}.pl2-card:hover .pl2-cov{transform:scale(1.03)}
+.pl2-cov{position:relative;width:100%;aspect-ratio:1;border-radius:calc(22px*var(--rad));overflow:hidden;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -12px rgba(0,0,0,.75),inset 0 0 0 1px rgba(255,255,255,.12)}
+.pl2-cov.one{font-size:3rem}
+.pl2-cov.grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px}
+.pl2-cov.grid i{display:flex;align-items:center;justify-content:center;font-style:normal;font-size:1.4rem;background-size:cover!important}
+.pl2-cov .solo{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:3rem;background-size:cover!important}
+.pl2-cov.round{font:800 2.4rem 'Sora',sans-serif;color:#fff}
+.pl2-cov.big{width:140px;flex:none}
+.pl2-empty{grid-column:1/-1;text-align:center;padding:2rem 1rem;border-radius:22px;border:1px dashed var(--glass-b);display:flex;flex-direction:column;align-items:center;gap:.9rem}.pl2-empty p{color:var(--muted);font-size:.9rem}
+.pl2-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:.7rem}
+.pl2-hero{display:flex;gap:1rem;align-items:flex-end;margin-bottom:1rem}
+.pl2-info{min-width:0}.pl2-info h2{font:800 1.5rem 'Sora',sans-serif;overflow-wrap:anywhere}.pl2-info p{color:var(--muted);font-size:.84rem;margin-top:.2rem}
+.pl2-acts{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.1rem}
+.pl2-list{display:flex;flex-direction:column;gap:2px}
+.pl2-list .at-add.rm{border-color:transparent;background:transparent;opacity:.6}
+.at-art{background-size:cover!important}
+
+/* ═════ Paramètres (liste) ═════ */
+.st-acc{display:flex;align-items:center;gap:.9rem;width:100%;padding:1rem;margin-bottom:.4rem;border-radius:calc(26px*var(--rad));border:1px solid var(--glass-b);background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;text-align:left;cursor:pointer;font-family:inherit;box-shadow:0 20px 50px -20px var(--c1),inset 0 1px 0 rgba(255,255,255,.3)}
+.st-acc span{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.st-acc b{font:800 1.15rem 'Sora',sans-serif}.st-acc small{opacity:.9;font-size:.78rem}.st-acc em{font-style:normal;font-size:1.6rem;opacity:.7}
+.pf-av.sm{width:56px;height:56px;font-size:1.7rem;border-width:2px}
+.st-card{padding:1rem;border-radius:calc(24px*var(--rad));border:1px solid var(--glass-b);background:var(--glass);backdrop-filter:blur(calc(var(--gb)*.6))}
+.st-note{padding:1rem;border-radius:18px;background:rgba(255,255,255,.06);margin-bottom:.8rem;font-size:.88rem}.st-note p{color:var(--muted);margin-top:.3rem;line-height:1.5}
+.pf-sw span{display:flex;flex-direction:column;gap:2px}.pf-sw small{color:var(--muted);font-size:.76rem}
+#profPage .pf-panel{background:none;border:0;padding:0;backdrop-filter:none}
+#profPage .pf-wrap{padding-bottom:calc(190px + env(safe-area-inset-bottom))}
+#profPage .pf-h{margin-top:1.4rem}
+#profPage .pf-row{border-radius:calc(20px*var(--rad))}
+
+/* ═════ Conditions : belle page ═════ */
+#talcoConsent{display:block!important;padding:0!important;overflow:hidden!important;background:radial-gradient(900px 600px at 15% -10%,rgba(139,123,255,.32),transparent 60%),radial-gradient(700px 500px at 100% 100%,rgba(255,61,110,.2),transparent 60%),#050507!important}
+.tcx-wrap{height:100%;max-width:780px;margin:0 auto;display:flex;flex-direction:column;padding:max(1rem,env(safe-area-inset-top)) 1rem max(.8rem,env(safe-area-inset-bottom))}
+.tcx-head{display:flex;align-items:center;gap:.9rem;padding:.3rem 0 .8rem}
+.tcx-logo{flex:none;width:56px;height:56px;border-radius:19px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;background:linear-gradient(135deg,#8b7bff,#ff4fa3);box-shadow:0 14px 34px -10px #8b7bff,inset 0 1px 0 rgba(255,255,255,.4)}
+.tcx-ttl h1{font:800 1.5rem 'Sora',system-ui,sans-serif;line-height:1.15}.tcx-ttl p{color:rgba(255,255,255,.55);font-size:.78rem;margin-top:.15rem}
+.tcx-x{margin-left:auto;flex:none;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);color:#fff;font-size:1rem;cursor:pointer}
+.tcx-sum{display:flex;gap:.45rem;overflow-x:auto;padding-bottom:.7rem;scrollbar-width:none}.tcx-sum::-webkit-scrollbar{display:none}
+.tcx-sum span{flex:none;padding:.42rem .85rem;border-radius:100px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);font-size:.74rem;color:rgba(255,255,255,.85)}
+.tcx-tabs{display:flex;gap:.4rem;overflow-x:auto;padding:.2rem 0 .8rem;scrollbar-width:none}.tcx-tabs::-webkit-scrollbar{display:none}
+.tcx-tabs button{flex:none;display:inline-flex;align-items:center;height:40px;padding:0 1.05rem;border-radius:100px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:rgba(255,255,255,.78);font:600 .84rem inherit;font-family:inherit;cursor:pointer;transition:.2s}
+.tcx-tabs button.on{background:linear-gradient(135deg,#8b7bff,#ff4fa3);border-color:transparent;color:#fff;box-shadow:0 10px 26px -10px #8b7bff}
+.tcx-body{flex:1;min-height:0;overflow:auto;padding:.2rem .1rem 1.2rem;-webkit-overflow-scrolling:touch}
+.tcx-h{font:800 1.25rem 'Sora',system-ui,sans-serif;margin:.2rem 0 .9rem}
+.tcx-intro{font-size:.88rem;line-height:1.6;color:rgba(255,255,255,.8);margin-bottom:.9rem;padding:.9rem 1rem;border-radius:18px;background:rgba(139,123,255,.12);border:1px solid rgba(139,123,255,.3)}
+.tcx-art{display:flex;gap:.9rem;padding:1rem;margin-bottom:.6rem;border-radius:20px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09)}
+.tcx-art i{flex:none;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#8b7bff,#ff4fa3);display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800;font-size:.78rem}
+.tcx-art h3{font-size:.95rem;margin-bottom:.25rem}.tcx-art p{font-size:.85rem;line-height:1.6;color:rgba(255,255,255,.76)}
+.tcx-ck{display:flex;flex-direction:column;gap:.25rem;padding:.8rem 1rem;margin-bottom:.5rem;border-radius:16px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09)}.tcx-ck code{color:#c9c2ff;font-size:.8rem}.tcx-ck span{font-size:.83rem;color:rgba(255,255,255,.76)}
+.tcx-contact{text-align:center;opacity:.55;font-size:.72rem;margin:1.2rem 0 .2rem;line-height:1.6}
+.tcx-foot{padding-top:.7rem;border-top:1px solid rgba(255,255,255,.1)}
+.tcx-chk{display:flex;gap:.7rem;align-items:flex-start;font-size:.82rem;line-height:1.45;cursor:pointer;margin-bottom:.4rem}.tcx-chk input{width:22px;height:22px;margin-top:1px;accent-color:#8b7bff;flex:none}
+.tcx-msg{color:#fb7185;min-height:1.1em;font-size:.8rem}
+.tcx-act{display:flex;gap:.6rem;justify-content:flex-end;flex-wrap:wrap}
+.tcx-b{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 1.3rem;border-radius:16px;border:1px solid rgba(255,255,255,.16);background:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.05));color:#fff;font:700 .92rem inherit;font-family:inherit;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.2)}
+.tcx-b.ok{background:linear-gradient(135deg,#8b7bff,#ff4fa3);border-color:transparent;box-shadow:0 14px 32px -12px #8b7bff,inset 0 1px 0 rgba(255,255,255,.35)}
+.tcx-b:disabled{opacity:.4;cursor:not-allowed}
+@media(max-width:480px){.tcx-act .tcx-b{flex:1}}
+
+#tabbar button{font-size:9.5px;letter-spacing:-.01em;padding:0}
+#overlayPlaylists .sheet>.sheet-header:first-of-type .sheet-title{display:none}
+#overlayPlaylists .sheet>.sheet-header:first-of-type{justify-content:flex-end;margin-bottom:0}
+.pl2-grid.art{grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:1.2rem .6rem}
+.pl2-grid.art .pl2-card{align-items:center;text-align:center}
+.pl2-grid.art .pl2-cov{max-width:104px}
+.pl2-grid.art .pl2-cov.round{font-size:1.9rem}
 </style>
     <script>
 (function () {
@@ -3734,57 +3874,70 @@ button{-webkit-tap-highlight-color:transparent}
 <noscript><div style="padding:2rem;font-family:system-ui,sans-serif;color:#fff;background:#0b0b10"><h2>TalcoMusic — MusiqueTalco</h2><p>TalcoMusic est le lecteur de musique en ligne gratuit de l’écosystème TalcoITN (GroupeTalco). Écoute tes titres, crée tes playlists, affiche les paroles et personnalise ton interface. JavaScript est nécessaire pour utiliser le lecteur.</p><p>Contact : talcoitn@gmail.com — © ® Talco 2025-2026.</p></div></noscript>
 <script>
 (function () {
-  var A = function (t, p) { return '<h4>' + t + '</h4><p>' + p + '</p>'; };
   var SEC = [
-    ['cgu', 'Conditions d’utilisation', [
-      A('1. Objet', 'Les présentes conditions encadrent l’utilisation de <b>TalcoMusic</b>, lecteur de musique en ligne édité par <b>GroupeTalco</b> (Talco-Inc / TalcoINC2026), administré par <b>TalcoAdministration</b>. En accédant au service, tu les acceptes sans réserve.'),
-      A('2. Accès et compte', 'Le service est gratuit. Un compte est facultatif : il se crée avec un code personnel de 6 chiffres que tu es seul à connaître. Garde-le secret : toute action faite avec ton code est réputée faite par toi. Le service est réservé aux personnes de 15 ans et plus, ou avec l’accord d’un représentant légal.'),
-      A('3. Tes contenus', 'Noms de playlists, présentation, messages à l’administrateur : tu es responsable de ce que tu écris. Les playlists « partagées » sont visibles par tous les comptes connectés. Tu nous autorises à stocker et afficher ces contenus pour faire fonctionner le service.'),
-      A('4. Propriété intellectuelle', 'L’interface, le code, le nom et le logo TalcoMusic sont protégés : <b>© ® Talco 2025-2026</b>, tous droits réservés. Les œuvres musicales, pochettes et photos d’artistes appartiennent à leurs ayants droit ; elles sont affichées à titre d’information et d’écoute personnelle. Toute reproduction, extraction ou revente est interdite sans autorisation écrite.'),
-      A('5. Comportements interdits', 'Contenus illégaux, haineux, harcelants ou trompeurs ; usurpation d’identité ; tentative de piratage, d’extraction massive ou de contournement de la sécurité ; surcharge volontaire du service.'),
-      A('6. Disponibilité et responsabilité', 'Le service est fourni « en l’état », sans garantie de disponibilité continue. Des interruptions (maintenance, panne d’un service tiers) peuvent survenir. GroupeTalco n’est pas responsable des dommages indirects, ni de la perte de données liée à un appareil ou un navigateur.'),
-      A('7. Suspension et suppression', 'TalcoAdministration peut supprimer un contenu ou suspendre un compte en cas d’abus, sans préavis. Tu peux supprimer ton compte à tout moment depuis Mon profil → Compte.'),
-      A('8. Évolution des conditions', 'Ces conditions peuvent évoluer. En cas de changement important, ton accord te sera demandé à nouveau. La version en vigueur est celle affichée dans le service.'),
-      A('9. Droit applicable', 'Droit français. En cas de litige, une solution amiable est recherchée avant toute action ; à défaut, les tribunaux français sont compétents.')]],
-    ['priv', 'Confidentialité et données personnelles', [
-      A('Responsable du traitement', 'GroupeTalco — TalcoAdministration, joignable à <b>talcoitn@gmail.com</b>.'),
-      A('Données concernées', 'Sans compte : uniquement des préférences stockées sur ton appareil. Avec un compte : identifiant technique dérivé de ton code (ton code n’est pas stocké en clair), nom affiché, présentation, avatar, couleurs et fond d’écran, playlists, messages échangés avec l’administrateur.'),
-      A('Finalités et base légale', 'Faire fonctionner le service et personnaliser l’affichage (exécution du service), assurer la sécurité et modérer les abus (intérêt légitime), mémoriser ton accord (obligation légale). Aucune publicité, aucun profilage, aucune revente.'),
-      A('Durée de conservation', 'Données de compte conservées jusqu’à la suppression du compte (par toi ou par l’administration en cas d’abus). Données locales conservées jusqu’à l’effacement de ton navigateur ou le retrait de ton accord.'),
-      A('Destinataires et services tiers', 'Google Firebase (authentification et base de données), Google Fonts (polices), Cloudinary (fichiers audio et images de fond), Apple iTunes Search (recherche de pochettes et dates : titre et artiste envoyés), Deezer et Wikipédia (photos d’artistes : nom de l’artiste envoyé), GitHub Pages (hébergement). Ces services reçoivent ton adresse IP. Certains sont situés hors de l’Union européenne (notamment aux États-Unis) et appliquent leurs propres garanties.'),
-      A('Sécurité', 'Connexion chiffrée (HTTPS), règles d’accès Firestore limitant chaque compte à ses données, accès administrateur restreint. Aucun système n’étant infaillible, choisis un code que tu n’utilises pas ailleurs.'),
-      A('Tes droits', 'Accès, rectification, effacement, limitation, opposition, portabilité, retrait du consentement. Tu peux modifier ton profil et supprimer ton compte toi-même dans Mon profil ; pour toute autre demande, écris à <b>talcoitn@gmail.com</b> ou via la messagerie du service. Tu peux aussi saisir la CNIL (cnil.fr).')]],
-    ['cook', 'Cookies et stockage local', [
-      '<p>TalcoMusic n’utilise <b>aucun cookie publicitaire ni de mesure d’audience</b>. Il enregistre uniquement des données techniques dans le stockage local de ton navigateur :</p><table class="tc-tab"><tr><th>Nom</th><th>Rôle</th></tr><tr><td>talcoConsent_v2</td><td>Mémorise ton accord à ces conditions</td></tr><tr><td>talcoProf_…</td><td>Copie locale de ton profil et de tes réglages</td></tr><tr><td>talcoMeta_v1</td><td>Dates et pochettes retrouvées</td></tr><tr><td>talcoArtistPics_v2</td><td>Photos d’artistes retrouvées</td></tr><tr><td>firebase:authUser…</td><td>Session de connexion (jusqu’à déconnexion)</td></tr><tr><td>Cache du service worker</td><td>Fonctionnement rapide et hors connexion</td></tr></table><p>Ces éléments sont nécessaires au service ou à tes réglages. Tu peux les effacer à tout moment depuis ton navigateur, ou retirer ton accord ci-dessous.</p>']],
-    ['legal', 'Mentions légales', [
-      A('Éditeur', 'GroupeTalco — Talco-Inc (TalcoINC2026). Service : TalcoMusic (TalcoMusic2026). Administration : TalcoAdministration.'),
-      A('Contact', '<b>talcoitn@gmail.com</b>'),
-      A('Hébergement', 'GitHub Pages (GitHub, Inc.). Données de compte : Google Firebase.'),
-      A('Droits', '© ® Talco 2025-2026. Tous droits réservés. Toute reproduction même partielle est interdite sans autorisation.')]]
+    { id: 'cgu', ic: '📜', t: 'Conditions', h: 'Conditions d’utilisation', a: [
+      ['Objet', 'Les présentes conditions encadrent l’utilisation de <b>TalcoMusic</b>, lecteur de musique en ligne édité par <b>GroupeTalco</b> (Talco-Inc / TalcoINC2026), administré par <b>TalcoAdministration</b>. En accédant au service, tu les acceptes sans réserve.'],
+      ['Accès et compte', 'Le service est gratuit. Un compte est facultatif : il se crée avec un code personnel de 6 chiffres que tu es seul à connaître. Garde-le secret : toute action faite avec ton code est réputée faite par toi. Le service est réservé aux personnes de 15 ans et plus, ou avec l’accord d’un représentant légal.'],
+      ['Tes contenus', 'Noms de playlists, présentation, messages à l’administrateur : tu es responsable de ce que tu écris. Les playlists « partagées » sont visibles par tous les comptes connectés. Tu nous autorises à stocker et afficher ces contenus pour faire fonctionner le service.'],
+      ['Propriété intellectuelle', 'L’interface, le code, le nom et le logo TalcoMusic sont protégés : <b>© ® Talco 2025-2026</b>, tous droits réservés. Les œuvres musicales, pochettes et photos d’artistes appartiennent à leurs ayants droit ; elles sont affichées à titre d’information et d’écoute personnelle. Toute reproduction, extraction ou revente est interdite sans autorisation écrite.'],
+      ['Comportements interdits', 'Contenus illégaux, haineux, harcelants ou trompeurs ; usurpation d’identité ; tentative de piratage, d’extraction massive ou de contournement de la sécurité ; surcharge volontaire du service.'],
+      ['Disponibilité et responsabilité', 'Le service est fourni « en l’état », sans garantie de disponibilité continue. Des interruptions (maintenance, panne d’un service tiers) peuvent survenir. GroupeTalco n’est pas responsable des dommages indirects, ni de la perte de données liée à un appareil ou un navigateur.'],
+      ['Suspension et suppression', 'TalcoAdministration peut supprimer un contenu ou suspendre un compte en cas d’abus, sans préavis. Tu peux supprimer ton compte à tout moment depuis Paramètres → Mon compte.'],
+      ['Évolution des conditions', 'Ces conditions peuvent évoluer. En cas de changement important, ton accord te sera demandé à nouveau. La version en vigueur est celle affichée dans le service.'],
+      ['Droit applicable', 'Droit français. En cas de litige, une solution amiable est recherchée avant toute action ; à défaut, les tribunaux français sont compétents.']] },
+    { id: 'priv', ic: '🔒', t: 'Confidentialité', h: 'Confidentialité et données personnelles', a: [
+      ['Responsable du traitement', 'GroupeTalco — TalcoAdministration, joignable à <b>talcoitn@gmail.com</b>.'],
+      ['Données concernées', 'Sans compte : uniquement des préférences stockées sur ton appareil. Avec un compte : identifiant technique dérivé de ton code (ton code n’est pas stocké en clair), nom affiché, présentation, avatar, couleurs et fond d’écran, playlists, messages échangés avec l’administrateur.'],
+      ['Finalités et base légale', 'Faire fonctionner le service et personnaliser l’affichage (exécution du service), assurer la sécurité et modérer les abus (intérêt légitime), mémoriser ton accord (obligation légale). Aucune publicité, aucun profilage, aucune revente.'],
+      ['Durée de conservation', 'Données de compte conservées jusqu’à la suppression du compte (par toi ou par l’administration en cas d’abus). Données locales conservées jusqu’à l’effacement de ton navigateur ou le retrait de ton accord.'],
+      ['Destinataires et services tiers', 'Google Firebase (authentification et base de données), Google Fonts (polices), Cloudinary (fichiers audio et images de fond), Apple iTunes Search (pochettes et dates : titre et artiste envoyés), Deezer et Wikipédia (photos d’artistes : nom de l’artiste envoyé), GitHub Pages (hébergement). Ces services reçoivent ton adresse IP. Certains sont situés hors de l’Union européenne (notamment aux États-Unis) et appliquent leurs propres garanties.'],
+      ['Sécurité', 'Connexion chiffrée (HTTPS), règles d’accès Firestore limitant chaque compte à ses données, accès administrateur restreint. Aucun système n’étant infaillible, choisis un code que tu n’utilises pas ailleurs.'],
+      ['Tes droits', 'Accès, rectification, effacement, limitation, opposition, portabilité, retrait du consentement. Tu peux modifier ton profil, exporter tes données et supprimer ton compte toi-même dans Paramètres → Mon compte ; pour toute autre demande, écris à <b>talcoitn@gmail.com</b>. Tu peux aussi saisir la CNIL (cnil.fr).']] },
+    { id: 'cook', ic: '🍪', t: 'Cookies', h: 'Cookies et stockage local', intro: 'TalcoMusic n’utilise <b>aucun cookie publicitaire ni de mesure d’audience</b>. Il enregistre uniquement des données techniques dans le stockage local de ton navigateur. Tu peux les effacer à tout moment ou retirer ton accord.', ck: [
+      ['talcoConsent_v2', 'Mémorise ton accord à ces conditions'],
+      ['talcoProf_…', 'Copie locale de ton profil et de tes réglages (verre, fond, couleurs)'],
+      ['talcoMeta_v1', 'Dates et pochettes retrouvées pour tes titres'],
+      ['talcoArtistPics_v2', 'Photos d’artistes retrouvées'],
+      ['firebase:authUser…', 'Session de connexion, jusqu’à la déconnexion'],
+      ['Cache du service worker', 'Fonctionnement rapide et hors connexion']] },
+    { id: 'legal', ic: '🏢', t: 'Mentions légales', h: 'Mentions légales', a: [
+      ['Éditeur', 'GroupeTalco — Talco-Inc (TalcoINC2026). Service : TalcoMusic (TalcoMusic2026). Administration : TalcoAdministration.'],
+      ['Contact', '<b>talcoitn@gmail.com</b>'],
+      ['Hébergement', 'GitHub Pages (GitHub, Inc.). Données de compte : Google Firebase.'],
+      ['Droits', '© ® Talco 2025-2026. Tous droits réservés. Toute reproduction même partielle est interdite sans autorisation.']] }
   ];
-  function html() {
-    var toc = '<div class="tc-toc">' + SEC.map(function (s) { return '<button type="button" data-s="' + s[0] + '">' + s[1] + '</button>'; }).join('') + '</div>';
-    return toc + SEC.map(function (s) { return '<h3 id="tc-' + s[0] + '">' + s[1] + '</h3>' + s[2].join(''); }).join('');
+  function panel(s) {
+    var h = '<h2 class="tcx-h">' + s.ic + ' ' + s.h + '</h2>';
+    if (s.intro) h += '<p class="tcx-intro">' + s.intro + '</p>';
+    if (s.a) h += s.a.map(function (x, i) { return '<article class="tcx-art"><i>' + (i + 1) + '</i><div><h3>' + x[0] + '</h3><p>' + x[1] + '</p></div></article>'; }).join('');
+    if (s.ck) h += s.ck.map(function (x) { return '<div class="tcx-ck"><code>' + x[0] + '</code><span>' + x[1] + '</span></div>'; }).join('');
+    return h + '<p class="tcx-contact">✉ talcoitn@gmail.com · © ® Talco 2025-2026 · GroupeTalco · TalcoINC2026 · TalcoMusic2026 · TalcoAdministration</p>';
   }
   function build(gate, sec) {
     var old = document.getElementById('talcoConsent'); if (old) old.remove();
     var o = document.createElement('div'); o.id = 'talcoConsent'; o.setAttribute('role', 'dialog'); o.setAttribute('aria-modal', 'true');
-    o.innerHTML = '<div class="tc-card"><div class="tc-logo">🎧</div><h2>' + (gate ? 'Bienvenue sur TalcoMusic' : 'Conditions &amp; confidentialité') + '</h2>'
-      + (gate ? '<p class="tc-lead">Pour utiliser le service, lis et accepte les conditions. TalcoMusic enregistre des informations sur ton appareil et, si tu crées un compte, sur des serveurs en ligne. Sans ton accord, l’accès est impossible.</p>' : '')
-      + '<div class="tc-terms" id="tcTerms">' + html() + '<p class="tc-foot">© ® Talco 2025-2026 · GroupeTalco · TalcoINC2026 · TalcoMusic2026 · TalcoAdministration</p></div>'
-      + (gate ? '<label class="tc-chk"><input type="checkbox" id="tcChk"> J’ai lu et j’accepte les conditions d’utilisation, la politique de confidentialité, la politique de cookies et l’enregistrement d’informations (stockage local et compte).</label><div class="tc-msg" id="tcMsg"></div><div class="tc-act"><button type="button" class="tc-b" id="tcNo">Refuser</button><button type="button" class="tc-b ok" id="tcOk" disabled>J’accepte et j’accède au service</button></div>'
-             : '<div class="tc-act"><button type="button" class="tc-b" id="tcRev">Retirer mon accord</button><button type="button" class="tc-b ok" id="tcClose">Fermer</button></div>')
-      + '</div>';
+    o.innerHTML = '<div class="tcx-wrap"><header class="tcx-head"><div class="tcx-logo">🎧</div><div class="tcx-ttl"><h1>' + (gate ? 'Bienvenue sur TalcoMusic' : 'Conditions &amp; confidentialité') + '</h1><p>Version 2 · GroupeTalco · TalcoMusic2026</p></div>' + (gate ? '' : '<button type="button" class="tcx-x" id="tcClose" aria-label="Fermer">✕</button>') + '</header>'
+      + '<div class="tcx-sum"><span>🔒 Pas de publicité ni de pistage</span><span>📦 Données sur ton appareil</span><span>🗑 Suppression de compte en 1 clic</span></div>'
+      + '<nav class="tcx-tabs" id="tcTabs">' + SEC.map(function (s) { return '<button type="button" data-s="' + s.id + '">' + s.ic + ' ' + s.t + '</button>'; }).join('') + '</nav>'
+      + '<main class="tcx-body" id="tcTerms"></main>'
+      + '<footer class="tcx-foot">' + (gate
+          ? '<label class="tcx-chk"><input type="checkbox" id="tcChk"><span>J’ai lu et j’accepte les conditions d’utilisation, la politique de confidentialité, la politique de cookies et l’enregistrement d’informations (stockage local et compte).</span></label><div class="tcx-msg" id="tcMsg"></div><div class="tcx-act"><button type="button" class="tcx-b" id="tcNo">Refuser</button><button type="button" class="tcx-b ok" id="tcOk" disabled>J’accepte et j’accède au service</button></div>'
+          : '<div class="tcx-act"><button type="button" class="tcx-b" id="tcRev">Retirer mon accord</button><button type="button" class="tcx-b ok" id="tcClose2">Fermer</button></div>') + '</footer></div>';
     document.body.appendChild(o);
     var $ = function (i) { return document.getElementById(i); };
-    o.querySelectorAll('.tc-toc button').forEach(function (b) { b.addEventListener('click', function () { var h = $('tc-' + b.dataset.s); if (h) $('tcTerms').scrollTo({ top: h.offsetTop - 8, behavior: 'smooth' }); }); });
-    if (sec && $('tc-' + sec)) setTimeout(function () { $('tcTerms').scrollTop = $('tc-' + sec).offsetTop - 8; }, 30);
+    function show(id) {
+      var s = SEC.filter(function (x) { return x.id === id; })[0] || SEC[0];
+      $('tcTerms').innerHTML = panel(s); $('tcTerms').scrollTop = 0;
+      o.querySelectorAll('#tcTabs button').forEach(function (b) { b.classList.toggle('on', b.dataset.s === s.id); });
+    }
+    o.querySelectorAll('#tcTabs button').forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.s); }); });
+    show(sec);
     if (gate) {
       $('tcChk').addEventListener('change', function () { $('tcOk').disabled = !this.checked; });
       $('tcOk').addEventListener('click', function () { if ($('tcChk').checked) window.talcoConsentGive(); });
       $('tcNo').addEventListener('click', function () { $('tcMsg').textContent = 'Sans ton accord, nous ne pouvons pas te donner accès au service. Tu peux changer d’avis à tout moment.'; });
     } else {
-      $('tcClose').addEventListener('click', function () { o.remove(); });
+      $('tcClose').addEventListener('click', function () { o.remove(); }); $('tcClose2').addEventListener('click', function () { o.remove(); });
       $('tcRev').addEventListener('click', function () { if (confirm('Retirer ton accord suspend l’accès au service. Continuer ?')) window.talcoConsentRevoke(); });
     }
   }
@@ -3912,7 +4065,7 @@ button{-webkit-tap-highlight-color:transparent}
               box.scrollTop = box.scrollHeight;
             }).catch(function () {});
           }
-          // ── Profil : personnalisation complète ──
+          // ── Paramètres : liquid glass, apparence, compte (sans compte : réglages gardés sur l'appareil) ──
           var COLORS = [['#8b7bff', '#ff4fa3'], ['#38bdf8', '#34d399'], ['#ff3d6e', '#ff7a45'], ['#f59e0b', '#ef4444'], ['#22d3ee', '#8b5cf6'], ['#a3e635', '#22c55e'], ['#f472b6', '#fb923c'], ['#e5e7eb', '#9ca3af']];
           var CNAMES = ['Aurore', 'Lagon', 'Braise', 'Ambre', 'Néon', 'Menthe', 'Coucher', 'Argent'];
           var WALLS = ['', 'radial-gradient(900px 600px at 20% 0%,#2b1b5e,transparent 60%),#07070c', 'linear-gradient(160deg,#0b1f2a,#050507)', 'linear-gradient(160deg,#2a0b1a,#050507)', 'linear-gradient(160deg,#0b2a1a,#050507)', 'linear-gradient(160deg,#2a1f0b,#050507)', '#000'];
@@ -3921,8 +4074,9 @@ button{-webkit-tap-highlight-color:transparent}
           var AVS = ['🎧', '🎵', '🎤', '🎸', '🎹', '🥁', '🔥', '🌙', '⚡', '💜', '🦄', '🐺', '🚀', '🌴', '👾', '😎'];
           var IMGOK = /^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/;
           var HEX = /^#[0-9a-fA-F]{6}$/;
-          var defProf = function () { return { name: '', bio: '', av: '🎧', avImg: '', c: 0, c1: '#8b7bff', c2: '#ff4fa3', w: 0, wc1: '#1b1038', wc2: '#050507', wa: 160, img: '', dim: 55, gb: 30, ga: 100, font: 'Inter', rad: 100, anim: true }; };
-          var prof = defProf(), saveT = null, curTab = 'id';
+          var PTITLE = { home: 'Paramètres', acc: 'Mon compte', bg: 'Fond d’écran', col: 'Couleurs', ui: 'Style', play: 'Accueil & lecture' };
+          var defProf = function () { return { name: '', bio: '', av: '🎧', avImg: '', c: 0, c1: '#8b7bff', c2: '#ff4fa3', w: 0, wc1: '#1b1038', wc2: '#050507', wa: 160, img: '', dim: 55, gb: 34, ga: 100, font: 'Inter', rad: 100, anim: true, rand: true, compact: false }; };
+          var prof = defProf(), saveT = null, panel = 'home', lastRand = true;
           function pmsg(s, ok) { var e = $('ppSt'); if (e) { e.textContent = s || ''; e.className = 'pf-st' + (ok ? ' ok' : ''); } }
           function applyProf() {
             var st = $('talcoProfStyle'); if (!st) { st = document.createElement('style'); st.id = 'talcoProfStyle'; document.head.appendChild(st); }
@@ -3936,27 +4090,34 @@ button{-webkit-tap-highlight-color:transparent}
             st.textContent = ':root{--c1:' + c1 + ';--c2:' + c2 + ';--acc:' + c2 + ';--gb:' + (+prof.gb) + 'px;--ga:' + (prof.ga / 100) + ';--rad:' + (prof.rad / 100) + (wall ? ';--wall:' + wall : '') + '}'
               + "body,button,input,textarea,select{font-family:'" + font + "',system-ui,sans-serif}"
               + (prof.anim ? '' : '*{animation:none!important;transition:none!important}');
-            var who = $('talcoWho');
+            document.documentElement.classList.toggle('compact', !!prof.compact);
+            window.talcoProf = prof;
+            if (lastRand !== (prof.rand !== false)) { lastRand = prof.rand !== false; if (window.talcoApplyHome) window.talcoApplyHome(); }
+            var who = $('talcoWho'), u = window._talcoUser;
             if (who) {
-              who.hidden = !window._talcoUser; who.textContent = '';
+              who.hidden = false; who.textContent = '';
               var av = document.createElement('span'); av.className = 'who-av';
-              if (prof.avImg && IMGOK.test(prof.avImg)) av.style.backgroundImage = 'url(' + prof.avImg + ')'; else av.textContent = prof.av || '🎧';
-              who.appendChild(av); who.appendChild(document.createTextNode(' ' + (prof.name || 'Mon profil')));
+              if (u && prof.avImg && IMGOK.test(prof.avImg)) av.style.backgroundImage = 'url(' + prof.avImg + ')';
+              else av.textContent = u ? (prof.av || '🎧') : '👤';
+              who.appendChild(av); who.setAttribute('aria-label', u ? (prof.name || 'Mon compte') : 'Se connecter'); who.title = u ? (prof.name || 'Mon compte') : 'Se connecter';
             }
           }
           function drawHero() {
-            var a = $('ppAv'); if (!a) return; a.textContent = ''; a.style.backgroundImage = '';
-            if (prof.avImg && IMGOK.test(prof.avImg)) a.style.backgroundImage = 'url(' + prof.avImg + ')'; else a.textContent = prof.av || '🎧';
-            $('ppName').textContent = prof.name || 'Ton nom'; $('ppBio').textContent = prof.bio || 'Ajoute une phrase de présentation';
-            $('ppAdmin').hidden = !window.talcoAdmin;
+            var a = $('stAv'); if (!a) return;
+            var u = window._talcoUser; a.textContent = ''; a.style.backgroundImage = '';
+            if (u && prof.avImg && IMGOK.test(prof.avImg)) a.style.backgroundImage = 'url(' + prof.avImg + ')'; else a.textContent = u ? (prof.av || '🎧') : '👤';
+            $('stName').textContent = u ? (prof.name || 'Ton nom') : 'Se connecter';
+            $('stSub').textContent = u ? (window.talcoAdmin ? '★ Administrateur · gérer mon compte' : (prof.bio || 'Gérer mon compte')) : 'Playlists, profil et messages sur tous tes appareils';
             $('acHello').textContent = 'Connecté ✓' + (prof.name ? ' — ' + prof.name : '');
+            $('aIn').hidden = !u; $('aOut').hidden = !!u;
           }
           function saveProf() {
-            var u = auth && auth.currentUser; if (!u) return;
+            var u = auth && auth.currentUser;
+            if (!u) { try { localStorage.setItem('talcoProf_guest', JSON.stringify(prof)); pmsg('✓ Enregistré sur cet appareil', true); } catch (e) {} return; }
             try { localStorage.setItem('talcoProf_' + u.uid, JSON.stringify(prof)); } catch (e) {}
             db.collection('profiles').doc(u.uid).set(prof).then(function () { pmsg('✓ Enregistré', true); }).catch(function () { pmsg('Enregistré sur cet appareil'); });
           }
-          function changed() { applyProf(); drawHero(); pmsg('…'); clearTimeout(saveT); saveT = setTimeout(saveProf, 700); }
+          function changed() { applyProf(); drawHero(); pmsg('…'); clearTimeout(saveT); saveT = setTimeout(saveProf, 600); }
           function tiles(box, items, sel, pick) {
             box.textContent = '';
             items.forEach(function (it, i) {
@@ -3966,7 +4127,7 @@ button{-webkit-tap-highlight-color:transparent}
             });
           }
           function drawProf() {
-            if (!$('ppName')) return;
+            if (!$('stName')) return;
             $('pName').value = prof.name; $('pBio').value = prof.bio;
             $('pAvs').textContent = '';
             AVS.forEach(function (e) { var b = document.createElement('button'); b.type = 'button'; b.className = 'pf-em' + (!prof.avImg && e === prof.av ? ' on' : ''); b.textContent = e; b.addEventListener('click', function () { prof.av = e; prof.avImg = ''; drawProf(); changed(); }); $('pAvs').appendChild(b); });
@@ -3976,10 +4137,11 @@ button{-webkit-tap-highlight-color:transparent}
             $('pW1').value = HEX.test(prof.wc1) ? prof.wc1 : '#1b1038'; $('pW2').value = HEX.test(prof.wc2) ? prof.wc2 : '#050507'; $('pWa').value = prof.wa;
             $('pFonts').textContent = '';
             FONTS.forEach(function (f) { var b = document.createElement('button'); b.type = 'button'; b.className = 'pf-chip' + (f === prof.font ? ' on' : ''); b.style.fontFamily = "'" + f + "',sans-serif"; b.textContent = f; b.addEventListener('click', function () { prof.font = f; drawProf(); changed(); }); $('pFonts').appendChild(b); });
-            $('pDim').value = prof.dim; $('pGb').value = prof.gb; $('pGa').value = prof.ga; $('pRad').value = prof.rad; $('pAnim').checked = !!prof.anim;
+            $('pDim').value = prof.dim; $('pGb').value = prof.gb; $('pGa').value = prof.ga; $('pRad').value = prof.rad; $('pAnim').checked = !!prof.anim; $('pRand').checked = prof.rand !== false; $('pCompact').checked = !!prof.compact;
             $('pGbV').textContent = prof.gb + ' px'; $('pGaV').textContent = prof.ga + ' %'; $('pRadV').textContent = prof.rad + ' %'; $('pDimV').textContent = prof.dim + ' %';
             drawHero();
           }
+          function loadGuest() { try { var c = JSON.parse(localStorage.getItem('talcoProf_guest') || 'null'); prof = Object.assign(defProf(), c || {}); } catch (e) { prof = defProf(); } applyProf(); drawProf(); }
           function loadProfile(u) {
             try { var c = JSON.parse(localStorage.getItem('talcoProf_' + u.uid) || 'null'); if (c) { prof = Object.assign(defProf(), c); applyProf(); drawProf(); } } catch (e) {}
             db.collection('profiles').doc(u.uid).get().then(function (d) {
@@ -3997,13 +4159,34 @@ button{-webkit-tap-highlight-color:transparent}
             };
             im.onerror = function () { pmsg('Image illisible.'); }; im.src = url;
           }
-          function tab(id) {
-            curTab = id;
-            document.querySelectorAll('#pfTabs .pf-tab').forEach(function (b) { b.classList.toggle('on', b.dataset.t === id); });
+          function go(id) {
+            panel = id;
             document.querySelectorAll('#profPage .pf-panel').forEach(function (p) { p.hidden = p.dataset.p !== id; });
+            $('stTitle').textContent = PTITLE[id] || 'Paramètres';
+            $('profPage').scrollTop = 0;
           }
-          function openProfile() { if (!auth || !auth.currentUser) { show(true); return; } drawProf(); tab(curTab); $('profPage').hidden = false; document.body.style.overflow = 'hidden'; $('profPage').scrollTop = 0; }
-          function closeProfile() { $('profPage').hidden = true; document.body.style.overflow = ''; }
+          function buildTools() {
+            var box = $('stTools'); box.textContent = '';
+            document.querySelectorAll('#gearMenu .gear-menu-item').forEach(function (it) {
+              var tx = it.textContent.replace(/\s+/g, ' ').trim();
+              if (/Paramètres|Artistes|Mon compte/.test(tx) || getComputedStyle(it).display === 'none') return;
+              var ico = (it.querySelector('.gmi-ico') || {}).textContent || '•', label = tx.replace(ico, '').trim();
+              var b = document.createElement('button'); b.type = 'button'; b.className = 'pf-row';
+              b.innerHTML = '<i></i><span><b></b></span><em>›</em>'; b.querySelector('i').textContent = ico; b.querySelector('b').textContent = label;
+              b.addEventListener('click', function () { closeSettingsPage(); it.click(); });
+              box.appendChild(b);
+            });
+          }
+          function openSettingsPage(sec) { drawProf(); buildTools(); go(sec || 'home'); $('profPage').hidden = false; document.body.style.overflow = 'hidden'; if (window.talcoTabPaint) window.talcoTabPaint(); }
+          function closeSettingsPage() { var p = $('profPage'); if (!p || p.hidden) return; p.hidden = true; document.body.style.overflow = ''; if (window.talcoTabPaint) window.talcoTabPaint(); }
+          function exportData() {
+            var u = auth && auth.currentUser; if (!u) return;
+            var out = { exporte_le: new Date().toISOString(), profil: prof };
+            try { out.playlists = userPlaylists.filter(function (p) { return p.mine; }).map(function (p) { return { nom: p.name, emoji: p.emoji, partagee: !!p.shared, titres: p.tracks.map(function (i) { return TRACKS[i].title + ' — ' + TRACKS[i].artist; }) }; }); } catch (e) {}
+            db.collection('adminMessages').where('uid', '==', u.uid).get().then(function (q) { out.messages = []; q.forEach(function (d) { var m = d.data(); out.messages.push({ date: new Date(m.ts).toISOString(), message: m.text, reponse: m.reply || '' }); }); }).catch(function () {}).then(function () {
+              var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' })); a.download = 'mes-donnees-talcomusic.json'; document.body.appendChild(a); a.click(); a.remove(); pmsg('✓ Export téléchargé', true);
+            });
+          }
           function deleteAll() {
             var u = auth && auth.currentUser; if (!u || !confirm('Supprimer définitivement ton compte, tes playlists, ton profil et tes messages ? Cette action est irréversible.')) return;
             var delQ = function (q) { return q.get().then(function (s) { return Promise.all(s.docs.map(function (d) { return d.ref.delete(); })); }); };
@@ -4015,38 +4198,57 @@ button{-webkit-tap-highlight-color:transparent}
             ]).then(function () { return u.delete(); }).then(function () { try { localStorage.removeItem('talcoProf_' + u.uid); } catch (e) {} location.reload(); })
               .catch(function (e) { pmsg(e.code === 'auth/requires-recent-login' ? 'Par sécurité : déconnecte-toi, reconnecte-toi, puis réessaie.' : 'Suppression impossible (' + (e.code || e.message) + ').'); });
           }
-          (function buildProfilePage() {
-            var pp = document.createElement('div'); pp.id = 'profPage'; pp.hidden = true; pp.setAttribute('role', 'dialog'); pp.setAttribute('aria-label', 'Mon profil');
+          (function buildSettingsPage() {
+            var pp = document.createElement('div'); pp.id = 'profPage'; pp.hidden = true; pp.setAttribute('role', 'dialog'); pp.setAttribute('aria-label', 'Paramètres');
             var rg = function (label, id, min, max) { return '<label class="pf-rg"><span>' + label + '</span><b id="' + id + 'V"></b><input type="range" id="' + id + '" min="' + min + '" max="' + max + '"></label>'; };
-            var row = function (id, ico, t, s, cls) { return '<button type="button" class="pf-row' + (cls ? ' ' + cls : '') + '" id="' + id + '"><i>' + ico + '</i><span><b>' + t + '</b><small>' + s + '</small></span><em>›</em></button>'; };
-            pp.innerHTML = '<div class="pf-wrap"><div class="pf-bar"><button type="button" class="pf-back" id="ppClose" aria-label="Retour">‹</button><b>Mon profil</b><span class="pf-st" id="ppSt"></span></div>'
-              + '<div class="pf-card"><div class="pf-av" id="ppAv"></div><div class="pf-who"><div class="pf-name" id="ppName"></div><div class="pf-bio" id="ppBio"></div><span class="pf-badge" id="ppAdmin" hidden>★ Administrateur</span></div></div>'
-              + '<div class="pf-tabs" id="pfTabs"><button type="button" class="pf-tab" data-t="id">🪪 Identité</button><button type="button" class="pf-tab" data-t="col">🎨 Couleurs</button><button type="button" class="pf-tab" data-t="bg">🖼️ Fond</button><button type="button" class="pf-tab" data-t="gl">🫧 Verre</button><button type="button" class="pf-tab" data-t="ui">⚙️ Style</button><button type="button" class="pf-tab" data-t="acc">👤 Compte</button></div>'
-              + '<div class="pf-panel" data-p="id"><label class="pf-f"><span>Nom affiché</span><input id="pName" maxlength="24" placeholder="Ton nom"></label><label class="pf-f"><span>Présentation</span><input id="pBio" maxlength="80" placeholder="Une phrase sur toi"></label><div class="pf-h">Avatar</div><div class="pf-ems" id="pAvs"></div><label class="pf-btn ghost">📷 Importer ma photo<input type="file" id="pAvFile" accept="image/*" hidden></label></div>'
-              + '<div class="pf-panel" data-p="col"><div class="pf-h">Thèmes</div><div class="pf-tiles round" id="pColors"></div><div class="pf-h">Couleurs personnalisées</div><div class="pf-pair"><label class="pf-pick"><input type="color" id="pC1"><span>Principale</span></label><label class="pf-pick"><input type="color" id="pC2"><span>Secondaire</span></label></div></div>'
-              + '<div class="pf-panel" data-p="bg"><div class="pf-h">Fonds</div><div class="pf-tiles wide" id="pWalls"></div><div class="pf-h">Dégradé personnalisé</div><div class="pf-pair"><label class="pf-pick"><input type="color" id="pW1"><span>Couleur A</span></label><label class="pf-pick"><input type="color" id="pW2"><span>Couleur B</span></label></div>' + rg('Angle', 'pWa', 0, 360).replace('<b id="pWaV"></b>', '') + '<div class="pf-h">Ma photo</div><label class="pf-btn ghost">📷 Choisir une photo de fond<input type="file" id="pWallFile" accept="image/*" hidden></label>' + rg('Assombrir la photo', 'pDim', 0, 90) + '</div>'
-              + '<div class="pf-panel" data-p="gl"><div class="pf-prev"><div class="pf-prev-bg"></div><div class="pf-prev-glass"><b>Liquid glass</b><small>Aperçu en direct</small></div></div>' + rg('Intensité du flou', 'pGb', 0, 60) + rg('Épaisseur du verre', 'pGa', 0, 250) + '</div>'
-              + '<div class="pf-panel" data-p="ui"><div class="pf-h">Police</div><div class="pf-chips" id="pFonts"></div>' + rg('Arrondis', 'pRad', 30, 170) + '<label class="pf-sw"><input type="checkbox" id="pAnim"><i></i><span>Animations et transitions</span></label><button type="button" class="pf-btn ghost" id="pReset">↺ Réinitialiser l’apparence</button></div>'
-              + '<div class="pf-panel" data-p="acc">' + row('pPl', '🎵', 'Mes playlists', 'Créer, partager, personnaliser') + row('pMsg', '💬', 'Contacter l’administrateur', 'Une question ou un problème ? Écris-lui ici') + row('pTerms', '📄', 'Conditions &amp; confidentialité', 'Cookies, données, mentions légales') + row('pOut', '🚪', 'Se déconnecter', 'Tu pourras te reconnecter avec ton code') + '<div class="pf-h danger">Zone sensible</div>' + row('pDel', '🗑', 'Supprimer mon compte', 'Efface profil, playlists et messages', 'danger') + '</div></div>';
+            var row = function (id, ico, t, s, cls) { return '<button type="button" class="pf-row' + (cls ? ' ' + cls : '') + '" id="' + id + '"><i>' + ico + '</i><span><b>' + t + '</b>' + (s ? '<small>' + s + '</small>' : '') + '</span><em>›</em></button>'; };
+            var sw = function (id, label, sub) { return '<label class="pf-sw"><input type="checkbox" id="' + id + '"><i></i><span><b>' + label + '</b>' + (sub ? '<small>' + sub + '</small>' : '') + '</span></label>'; };
+            pp.innerHTML = '<div class="pf-wrap"><div class="pf-bar"><button type="button" class="pf-back" id="ppClose" aria-label="Retour">‹</button><b id="stTitle">Paramètres</b><span class="pf-st" id="ppSt"></span></div>'
+              + '<div class="pf-panel" data-p="home">'
+              +   '<button type="button" class="st-acc" id="stAcc"><div class="pf-av sm" id="stAv"></div><span><b id="stName"></b><small id="stSub"></small></span><em>›</em></button>'
+              +   '<div class="pf-h">Liquid glass</div><div class="st-card"><div class="pf-prev"><div class="pf-prev-bg"></div><div class="pf-prev-glass"><b>Barre du bas &amp; fenêtres</b><small>Aperçu en direct</small></div></div>' + rg('Intensité du flou', 'pGb', 0, 60) + rg('Épaisseur du verre', 'pGa', 0, 250) + '<button type="button" class="pf-btn ghost" id="pGlassReset">↺ Verre par défaut</button></div>'
+              +   '<div class="pf-h">Apparence</div>' + row('goBg', '🖼️', 'Fond d’écran', 'Image par défaut, dégradé ou ta photo') + row('goCol', '🎨', 'Couleurs', 'Thèmes et couleurs personnalisées') + row('goUi', '🔤', 'Style', 'Police, arrondis, animations')
+              +   '<div class="pf-h">Accueil &amp; lecture</div>' + row('goPlay', '🏠', 'Accueil &amp; lecture', 'Ordre aléatoire, affichage compact')
+              +   '<div class="pf-h">Outils</div><div id="stTools"></div>'
+              +   '<div class="pf-h">Aide &amp; légal</div>' + row('goMsg', '💬', 'Contacter l’administrateur', 'Une question ou un problème ?') + row('goTerms', '📄', 'Conditions &amp; confidentialité', 'Cookies, données, mentions légales')
+              + '</div>'
+              + '<div class="pf-panel" data-p="acc" hidden>'
+              +   '<div id="aOut"><div class="st-note"><b>Pas encore de compte ?</b><p>Crée-en un en 10 secondes avec un code à 6 chiffres : tes playlists, ton profil et tes réglages te suivent sur tous tes appareils.</p></div><button type="button" class="pf-btn" id="aLogin">Se connecter / créer un compte</button></div>'
+              +   '<div id="aIn" hidden><label class="pf-f"><span>Nom affiché</span><input id="pName" maxlength="24" placeholder="Ton nom"></label><label class="pf-f"><span>Présentation</span><input id="pBio" maxlength="80" placeholder="Une phrase sur toi"></label><div class="pf-h">Avatar</div><div class="pf-ems" id="pAvs"></div><label class="pf-btn ghost">📷 Importer ma photo<input type="file" id="pAvFile" accept="image/*" hidden></label>'
+              +   '<div class="pf-h">Gérer mon compte</div>' + row('pPl', '🎵', 'Mes playlists', 'Créer, partager, personnaliser') + row('pMsg', '💬', 'Messagerie avec l’administrateur', 'Écrire, lire les réponses') + row('pExport', '📦', 'Exporter mes données', 'Télécharger profil, playlists, messages') + row('pOut', '🚪', 'Se déconnecter', 'Tu pourras te reconnecter avec ton code') + '<div class="pf-h danger">Zone sensible</div>' + row('pDel', '🗑', 'Supprimer mon compte', 'Efface profil, playlists et messages', 'danger') + '</div>'
+              + '</div>'
+              + '<div class="pf-panel" data-p="bg" hidden><div class="pf-h">Fonds</div><div class="pf-tiles wide" id="pWalls"></div><div class="pf-h">Dégradé personnalisé</div><div class="pf-pair"><label class="pf-pick"><input type="color" id="pW1"><span>Couleur A</span></label><label class="pf-pick"><input type="color" id="pW2"><span>Couleur B</span></label></div>' + rg('Angle', 'pWa', 0, 360).replace('<b id="pWaV"></b>', '') + '<div class="pf-h">Ma photo</div><label class="pf-btn ghost">📷 Choisir une photo de fond<input type="file" id="pWallFile" accept="image/*" hidden></label>' + rg('Assombrir la photo', 'pDim', 0, 90) + '</div>'
+              + '<div class="pf-panel" data-p="col" hidden><div class="pf-h">Thèmes</div><div class="pf-tiles round" id="pColors"></div><div class="pf-h">Couleurs personnalisées</div><div class="pf-pair"><label class="pf-pick"><input type="color" id="pC1"><span>Principale</span></label><label class="pf-pick"><input type="color" id="pC2"><span>Secondaire</span></label></div></div>'
+              + '<div class="pf-panel" data-p="ui" hidden><div class="pf-h">Police</div><div class="pf-chips" id="pFonts"></div>' + rg('Arrondis', 'pRad', 30, 170) + sw('pAnim', 'Animations et transitions') + '<button type="button" class="pf-btn ghost" id="pReset">↺ Réinitialiser l’apparence</button></div>'
+              + '<div class="pf-panel" data-p="play" hidden>' + sw('pRand', 'Accueil en ordre aléatoire', 'Les titres de l’accueil sont mélangés') + sw('pCompact', 'Affichage compact', 'Listes plus serrées') + '</div></div>';
             document.body.appendChild(pp);
             var bind = function (id, key, num, label) { $(id).addEventListener('input', function () { prof[key] = num ? +this.value : this.value; if (id === 'pC1' || id === 'pC2') prof.c = -1; if (id === 'pW1' || id === 'pW2' || id === 'pWa') { prof.w = -1; prof.img = ''; } if (label) $(label).textContent = this.value + (label === 'pGbV' ? ' px' : ' %'); changed(); if (/^p(C|W)[12a]?$/.test(id)) drawProf(); }); };
             bind('pName', 'name'); bind('pBio', 'bio'); bind('pC1', 'c1'); bind('pC2', 'c2'); bind('pW1', 'wc1'); bind('pW2', 'wc2'); bind('pWa', 'wa', 1);
             bind('pDim', 'dim', 1, 'pDimV'); bind('pGb', 'gb', 1, 'pGbV'); bind('pGa', 'ga', 1, 'pGaV'); bind('pRad', 'rad', 1, 'pRadV');
             $('pAnim').addEventListener('change', function () { prof.anim = this.checked; changed(); });
+            $('pRand').addEventListener('change', function () { prof.rand = this.checked; changed(); });
+            $('pCompact').addEventListener('change', function () { prof.compact = this.checked; changed(); });
             $('pAvFile').addEventListener('change', function (e) { var f = e.target.files[0]; if (f) photo(f, 160, true, function (d) { prof.avImg = d; drawProf(); changed(); }); e.target.value = ''; });
             $('pWallFile').addEventListener('change', function (e) { var f = e.target.files[0]; if (f) photo(f, 1400, false, function (d) { prof.img = d; drawProf(); changed(); }); e.target.value = ''; });
-            $('pReset').addEventListener('click', function () { var n = prof.name, b = prof.bio, a = prof.av, ai = prof.avImg; prof = defProf(); prof.name = n; prof.bio = b; prof.av = a; prof.avImg = ai; drawProf(); changed(); });
-            document.querySelectorAll('#pfTabs .pf-tab').forEach(function (b) { b.addEventListener('click', function () { tab(b.dataset.t); }); });
-            $('ppClose').addEventListener('click', closeProfile);
-            $('pPl').addEventListener('click', function () { closeProfile(); if (window.openPlaylists) window.openPlaylists(); });
+            $('pGlassReset').addEventListener('click', function () { prof.gb = 34; prof.ga = 100; drawProf(); changed(); });
+            $('pReset').addEventListener('click', function () { var k = ['name', 'bio', 'av', 'avImg', 'gb', 'ga', 'rand', 'compact'], keep = {}; k.forEach(function (x) { keep[x] = prof[x]; }); prof = Object.assign(defProf(), keep); drawProf(); changed(); });
+            $('goBg').addEventListener('click', function () { go('bg'); }); $('goCol').addEventListener('click', function () { go('col'); }); $('goUi').addEventListener('click', function () { go('ui'); }); $('goPlay').addEventListener('click', function () { go('play'); });
+            $('stAcc').addEventListener('click', function () { if (auth && auth.currentUser) go('acc'); else { closeSettingsPage(); show(true); } });
+            $('aLogin').addEventListener('click', function () { closeSettingsPage(); show(true); });
+            $('goMsg').addEventListener('click', function () { show(true); });
+            $('goTerms').addEventListener('click', function () { if (window.talcoShowTerms) window.talcoShowTerms(); });
+            $('ppClose').addEventListener('click', function () { if (panel !== 'home') go('home'); else closeSettingsPage(); });
+            $('pPl').addEventListener('click', function () { closeSettingsPage(); if (window.talcoTab) window.talcoTab('playlists'); });
             $('pMsg').addEventListener('click', function () { show(true); });
-            $('pTerms').addEventListener('click', function () { if (window.talcoShowTerms) window.talcoShowTerms(); });
-            $('pOut').addEventListener('click', function () { closeProfile(); auth.signOut(); });
+            $('pExport').addEventListener('click', exportData);
+            $('pOut').addEventListener('click', function () { closeSettingsPage(); auth.signOut(); });
             $('pDel').addEventListener('click', deleteAll);
           })();
-          $('acProf').addEventListener('click', function () { show(false); openProfile(); });
-          window.talcoProfile = { open: openProfile };
-          document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('#talcoWho')) openProfile(); });
+          $('acProf').addEventListener('click', function () { show(false); openSettingsPage('acc'); });
+          window.talcoSettings = { open: openSettingsPage, close: closeSettingsPage };
+          document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('#talcoWho')) { if (auth && auth.currentUser) openSettingsPage('acc'); else show(true); } });
+          document.addEventListener('DOMContentLoaded', function () { applyProf(); });
+          loadGuest();
           
 if (auth) auth.onAuthStateChanged(function (u) {
             window.talcoAdmin = !!(u && u.email === ADMIN_EMAIL);
@@ -4054,7 +4256,7 @@ if (auth) auth.onAuthStateChanged(function (u) {
             if (window.talcoSetUser) window.talcoSetUser(window._talcoUser);
             $('acOut').hidden = !!u; $('acIn').hidden = !u; $('acCode').value = ''; $('acAdmin').hidden = true; $('acChat').hidden = !!window.talcoAdmin;
             if (u) { applyProf(); loadProfile(u); if (window.talcoAdmin) loadAdmin(); else loadThread(); }
-            else { prof = defProf(); applyProf(); }
+            else { loadGuest(); }
           });
           $('acSend').addEventListener('click', function () {
             var tx = $('acMsg').value.trim(), u = auth && auth.currentUser; if (!u || !tx) return;
@@ -4957,6 +5159,8 @@ if (auth) auth.onAuthStateChanged(function (u) {
                 ]
             };
 const TRACKS = [
+{"title": "Dance of the Knights", "artist": "Sergueï Prokofiev", "url": "https://res.cloudinary.com/tbmdciyv/video/upload/v1794330936/Dance_of_the_Knights_-_Rom%C3%A9o_et_Juliette_-_Prokofiev.mp3", "year": 1935, "g": ["#4b3b7a", "#c04b6e"], "emoji": "⚔️", "lyrics": ""},
+{"title": "A Time for Us", "artist": "Joslin", "url": "https://res.cloudinary.com/tbmdciyv/video/upload/v1794330873/Th%C3%AAme_de_l_amour_-_Romeo_et_Juliette_-_Joslin_Henri_Mancini_-_Nino_Rota.mp3", "year": 1968, "g": ["#d65c7a", "#f2a65a"], "emoji": "🌹", "lyrics": ""},
 {"title": "Yougotmefeeling", "artist": "Parcels", "url": "https://res.cloudinary.com/tbmdciyv/video/upload/v1794305748/Yougotmefeeling_-_Parcels.m4a", "year": null, "g": ["#d6a241", "#9fd641"], "emoji": "🦎", "lyrics": ""},
 {"title": "Young Infinity Jaymes Young", "artist": "—", "url": "https://res.cloudinary.com/tbmdciyv/video/upload/v1794305748/Young_Infinity_Jaymes_Young.m4a", "year": null, "g": ["#9841d6", "#d641a9"], "emoji": "👎", "lyrics": ""},
 {"title": "Zoo", "artist": "Shakira", "url": "https://res.cloudinary.com/tbmdciyv/video/upload/v1794305747/Zoo_-_Shakira.m4a", "year": 2025, "g": ["#d67d41", "#c4d641"], "emoji": "🐭", "lyrics": ""},
@@ -5814,7 +6018,7 @@ const TRACKS = [
             }
             async function fetchArtistPhoto(n) {
                 if (artistPhotoURL(n)) return artistPhotoURL(n);
-                if (n in apCache) return '';
+                if (n in apCache) return artistCoverFallback(n);
                 if (!window.talcoConsentOK || !window.talcoConsentOK()) return '';
                 let u = '', failed = 0;
                 try { u = await deezerPhoto(n); } catch (e) { failed++; }
@@ -5822,7 +6026,7 @@ const TRACKS = [
                 if (!u && failed >= 2) return '';
                 apCache[n] = safeURL(u);
                 try { localStorage.setItem(AP_KEY, JSON.stringify(apCache)); } catch (e) {}
-                return apCache[n];
+                return apCache[n] || artistCoverFallback(n);
             }
             function setPicImg(el, url) {
                 if (!el || !url || el.querySelector('img')) return;
@@ -6596,7 +6800,7 @@ const TRACKS = [
             }
 
             function playTrack(idx) {
-                try { window.talcoMetaWant && window.talcoMetaWant(idx); } catch (e) {}
+                try { window.talcoMetaNow && window.talcoMetaNow(idx); } catch (e) {}
                 if (!keepQueue) queueList = null;
                 keepQueue = false;
                 cur = idx;
@@ -7059,8 +7263,8 @@ const TRACKS = [
                     const d = document.createElement('div');
                     d.className = 'at-item' + (!plSelectMode && i === cur ? ' active' : '');
                     d.innerHTML = `<div class="at-num">${plSelectMode ? '☐' : (n + 1)}</div>
-    <div class="at-art" style="background:${t.cover ? coverCSS(t) : gradStr(t)}">${t.cover ? '' : t.emoji}</div>
-    <div class="at-info"><div class="at-title">${t.title}</div><div class="at-artist">${t.artist}</div></div>`;
+    <div class="at-art" data-i="${i}" style="background:${t.cover ? coverCSS(t) : gradStr(t)}">${t.cover ? '' : t.emoji}</div>
+    <div class="at-info"><div class="at-title">${t.title}</div><div class="at-artist">${t.artist}</div></div>${plSelectMode ? '' : `<button type="button" class="at-add" data-i="${i}" title="Ajouter à une playlist" aria-label="Ajouter à une playlist">＋</button>`}`;
                     if (plSelectMode) {
                         d.onclick = () => togglePlSelection(i, d);
                     } else {
@@ -7774,6 +7978,266 @@ const TRACKS = [
                 });
             })();
 
+                        // ══════════ v6 : performances, navigation façon Apple Music, ajout aux playlists, playlists refaites ══════════
+            // Perf : on ne précharge plus les 409 fichiers audio juste pour afficher une durée totale
+            function computeTotalLibraryDuration(elId) { const el = elId && document.getElementById(elId); if (el) el.textContent = TRACKS.length + ' titres'; }
+
+            // Pochettes : chargées en priorité pour le titre cliqué, puis pour les titres visibles à l'écran
+            const metaBusy = new Set();
+            async function metaFetch(i) {
+                const t = TRACKS[i]; if (!metaNeeds(t)) return 'ok';
+                try {
+                    const a0 = t.artist.split(/,\s*/)[0], name = t.title;
+                    const r = await fetch('https://itunes.apple.com/search?media=music&entity=song&limit=8&country=fr&term=' + encodeURIComponent(name + ' ' + a0));
+                    if (!r.ok) return 'limit';
+                    const d = await r.json();
+                    const hit = (d.results || []).filter(x => normS(x.trackName).includes(normS(name)) && normS(x.artistName).includes(normS(a0).slice(0, 5)));
+                    const ys = hit.map(x => new Date(x.releaseDate).getFullYear()).filter(y => y > 1900);
+                    const art = hit.map(x => String(x.artworkUrl100 || '').replace('100x100bb', '400x400bb')).find(coverOK);
+                    meta[metaKey(t)] = { y: ys.length ? Math.min(...ys) : 0, c: art || '' };
+                    try { localStorage.setItem(META_KEY, JSON.stringify(meta)); } catch (e) {}
+                    const had = t.year; applyMeta(t);
+                    if (t.cover) { const im = new Image(); im.src = t.cover; }
+                    if (t.year && !had) document.querySelectorAll('#card' + i + ' .tr-d').forEach(el => el.textContent = String(t.year));
+                    if (t.cover) refreshCoverDom(i);
+                    return 'ok';
+                } catch (e) { return 'err'; }
+            }
+            async function metaStep() {
+                const i = metaQ.shift(); if (i == null) { metaRunning = false; return; }
+                if (!metaNeeds(TRACKS[i]) || metaBusy.has(i)) return metaStep();
+                metaBusy.add(i);
+                const r = await metaFetch(i); metaBusy.delete(i);
+                if (r !== 'ok') metaQ.unshift(i);
+                setTimeout(metaStep, r === 'limit' ? 60000 : r === 'err' ? 20000 : 2800);
+            }
+            window.talcoMetaNow = function (i) {                      // clic sur un titre : sa pochette passe avant tout
+                if (!window.talcoConsentOK || !window.talcoConsentOK() || !metaNeeds(TRACKS[i]) || metaBusy.has(i)) return;
+                metaQ = metaQ.filter(x => x !== i); metaBusy.add(i);
+                metaFetch(i).then(r => { metaBusy.delete(i); if (r !== 'ok') { metaQ.unshift(i); metaKick(); } });
+            };
+            metaQ = [];                                               // plus de file géante au démarrage
+            function refreshCoverDom(i) {
+                const t = TRACKS[i]; if (!t || !t.cover) return;
+                document.querySelectorAll('.tr-cov[data-i="' + i + '"], .sb-thumb[data-i="' + i + '"], .at-art[data-i="' + i + '"], .pl2-cov i[data-i="' + i + '"], .pl2-cov .solo[data-i="' + i + '"]').forEach(el => { el.style.background = coverCSS(t); el.textContent = ''; });
+                const names = String(t.artist).split(/,\s*/);
+                document.querySelectorAll('[data-n]:not(.has-photo)').forEach(el => { if (names.includes(el.dataset.n) && (el.classList.contains('ar-pic') || el.classList.contains('pl2-cov') || el.classList.contains('pl-card-art'))) showPic(el, t.cover); });
+                if (i === cur) { try { updateUI(); } catch (e) {} }
+            }
+            function artistCoverFallback(n) {                         // pas de photo d'artiste : pochette d'un de ses titres
+                const ids = (artistMap().get(n) || []).slice(0, 4);
+                for (const i of ids) if (TRACKS[i].cover) return TRACKS[i].cover;
+                ids.forEach(i => window.talcoMetaWant && window.talcoMetaWant(i));
+                return '';
+            }
+            function showPic(el, u) {
+                if (!el || !u) return;
+                el.classList.add('has-photo');
+                if (el.classList.contains('ar-pic') || el.classList.contains('pl2-cov') || el.classList.contains('pl-card-art')) { const im = new Image(); im.onload = () => { el.style.background = 'url("' + u + '") center/cover'; el.style.fontSize = '0'; el.textContent = ''; }; im.onerror = () => el.classList.remove('has-photo'); im.src = u; }
+                else setPicImg(el, u);
+            }
+            async function wikiPhoto(n) {
+                const MUSIC = /chant|rappeu|DJ|musici|compositeur|groupe|singer|rapper|band|producer|producteur|composer|duo|pianiste|songwriter|artiste|orchestr/i;
+                for (const lang of ['fr', 'en']) {
+                    const r = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(n.replace(/ /g, '_'))}`);
+                    if (r.ok) { const d = await r.json(), txt = (d.description || '') + ' ' + (d.extract || '').slice(0, 240); if (d.type === 'standard' && d.thumbnail && MUSIC.test(txt)) return d.thumbnail.source; }
+                    const q = encodeURIComponent(n + (lang === 'fr' ? ' chanteur groupe musicien' : ' singer band musician'));
+                    const r2 = await fetch(`https://${lang}.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${q}&gsrlimit=4&prop=pageimages&piprop=thumbnail&pithumbsize=500&format=json&origin=*`);
+                    if (r2.ok) {
+                        const d = await r2.json(), k = normS(n);
+                        const pages = Object.values((d.query && d.query.pages) || {}).sort((a, b) => a.index - b.index);
+                        const hit = pages.find(p => p.thumbnail && normS(p.title).includes(k));
+                        if (hit) return hit.thumbnail.source;
+                    }
+                }
+                return '';
+            }
+            { // observe les pochettes : une pochette visible est demandée
+                const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); window.talcoMetaWant(+e.target.dataset.i); } }), { rootMargin: '150px' });
+                const scan = n => { if (n.nodeType !== 1) return; if (n.matches && n.matches('.tr-cov[data-i],.sb-thumb[data-i],.at-art[data-i],.pl2-cov i[data-i],.pl2-cov .solo[data-i]')) io.observe(n); n.querySelectorAll && n.querySelectorAll('.tr-cov[data-i],.sb-thumb[data-i],.at-art[data-i],.pl2-cov i[data-i],.pl2-cov .solo[data-i]').forEach(el => io.observe(el)); };
+                new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(scan))).observe(document.body, { childList: true, subtree: true });
+                scan(document.body);
+            }
+
+            // ══ Ajouter un titre à une playlist (petit bouton ＋ dans « Titres ») ══
+            function modalShell(id, inner) {
+                document.getElementById(id)?.remove();
+                const m = document.createElement('div'); m.id = id; m.className = 'tz-modal'; m.innerHTML = '<div class="tz-card">' + inner + '</div>';
+                m.addEventListener('click', e => { if (e.target === m) m.remove(); });
+                document.body.appendChild(m); return m;
+            }
+            async function addTrackToPlaylist(pl, i) {
+                if (pl.tracks.includes(i)) return false;
+                const titles = [...pl.tracks, i].map(k => TRACKS[k].orig || TRACKS[k].title);
+                await pl.ref.update({ trackTitles: titles }); pl.tracks.push(i); return true;
+            }
+            function openAddToPlaylist(i) {
+                const t = TRACKS[i];
+                if (!cosmicAuthReady) {
+                    const m = modalShell('plAddModal', '<h3>Ajouter à une playlist</h3><p class="tz-p">Connecte-toi pour enregistrer tes playlists.</p><div class="tz-act"><button class="tz-b" data-x>Fermer</button><button class="tz-b ok" id="tzLogin">Se connecter</button></div>');
+                    m.querySelector('[data-x]').onclick = () => m.remove(); m.querySelector('#tzLogin').onclick = () => { m.remove(); window.talcoAccount && window.talcoAccount.open(); }; return;
+                }
+                const mine = userPlaylists.filter(p => p.mine && p.ref);
+                const m = modalShell('plAddModal', '<h3>Ajouter à une playlist</h3><p class="tz-p"><b></b></p><div class="tz-list" id="tzList"></div><div class="tz-act"><button class="tz-b" data-x>Fermer</button></div>');
+                m.querySelector('.tz-p b').textContent = t.title + ' — ' + t.artist;
+                m.querySelector('[data-x]').onclick = () => m.remove();
+                const box = m.querySelector('#tzList');
+                const mk = (ico, name, sub, fn, on) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'tz-row' + (on ? ' on' : ''); b.innerHTML = '<i></i><span><b></b><small></small></span><em>' + (on ? '✓' : '＋') + '</em>'; b.querySelector('i').textContent = ico; b.querySelector('b').textContent = name; b.querySelector('small').textContent = sub; b.onclick = fn; box.appendChild(b); return b; };
+                mk('✨', 'Nouvelle playlist', 'Créer et y ajouter ce titre', () => { m.remove(); newPlaylistModal(i); });
+                mine.forEach(pl => mk(pl.emoji || '⭐', pl.name, pl.tracks.length + ' titres' + (pl.shared ? ' · partagée' : ''), async function () {
+                    try { const ok = await addTrackToPlaylist(pl, i); showToast(ok ? '✅ Ajouté à « ' + pl.name + ' »' : 'Déjà dans « ' + pl.name + ' »'); m.remove(); } catch (e) { showToast('❌ Ajout refusé'); }
+                }, pl.tracks.includes(i)));
+            }
+            document.getElementById('allTracksList').addEventListener('click', e => {
+                const b = e.target.closest && e.target.closest('.at-add'); if (!b) return;
+                e.stopPropagation(); e.preventDefault(); openAddToPlaylist(+b.dataset.i);
+            }, true);
+
+            // ══ Nouvelle playlist (formulaire propre au lieu de prompt/confirm) ══
+            function newPlaylistModal(firstTrack) {
+                if (!cosmicAuthReady) { window.talcoAccount && window.talcoAccount.open(); return; }
+                const m = modalShell('plNewModal', '<h3>Nouvelle playlist</h3><input id="tzName" maxlength="40" placeholder="Nom de la playlist"><label class="tz-sw"><input type="checkbox" id="tzShared"><i></i><span>Partager avec tous les comptes</span></label><div class="tz-act"><button class="tz-b" data-x>Annuler</button><button class="tz-b ok" id="tzOk">Créer</button></div>');
+                m.querySelector('[data-x]').onclick = () => m.remove();
+                setTimeout(() => m.querySelector('#tzName').focus(), 50);
+                m.querySelector('#tzOk').onclick = async () => {
+                    const name = m.querySelector('#tzName').value.trim(); if (!name) { m.querySelector('#tzName').focus(); return; }
+                    plSelectShared = m.querySelector('#tzShared').checked; plSelectName = name; m.remove();
+                    if (typeof firstTrack === 'number') { try { await saveUserPlaylist(name, [firstTrack]); showToast('✅ Playlist « ' + name + ' » créée'); } catch (e) { showToast('❌ Création refusée'); } if (!document.getElementById('overlayPlaylists').classList.contains('active')) return; buildPlaylistGrid(); return; }
+                    plSelectMode = true; plSelection = new Set(); openAllTracks();
+                    showToast('Coche les titres puis « Enregistrer »');
+                };
+            }
+            function startPlaylistCreation() { newPlaylistModal(); }
+
+            // ══ PLAYLISTS : nouvelle interface ══
+            let plTab = 'mine';
+            function plCoverHTML(pl, big) {
+                const ids = pl.tracks.slice(0, 4), col = pl.color ? ' style="background:' + escH(pl.color) + '"' : '';
+                if (!ids.length) return '<div class="pl2-cov one"' + col + '>' + escH(pl.emoji || '🎧') + '</div>';
+                const cell = i => { const t = TRACKS[i]; return '<i data-i="' + i + '" style="background:' + (t.cover ? coverCSS(t) : gradStr(t)) + '">' + (t.cover ? '' : t.emoji) + '</i>'; };
+                if (ids.length < 4) return '<div class="pl2-cov one"' + col + '><u class="solo" data-i="' + ids[0] + '" style="background:' + (TRACKS[ids[0]].cover ? coverCSS(TRACKS[ids[0]]) : gradStr(TRACKS[ids[0]])) + '">' + (TRACKS[ids[0]].cover ? '' : TRACKS[ids[0]].emoji) + '</u></div>';
+                return '<div class="pl2-cov grid"' + col + '>' + ids.map(cell).join('') + '</div>';
+            }
+            function openPlaylists() {
+                document.getElementById('playlistGrid').style.display = 'block';
+                document.getElementById('playlistTracks').style.display = 'none';
+                buildPlaylistGrid();
+                openOverlay('overlayPlaylists');
+            }
+            function showPlaylistList() { document.getElementById('playlistGrid').style.display = 'block'; document.getElementById('playlistTracks').style.display = 'none'; buildPlaylistGrid(); }
+            function buildPlaylistGrid() {
+                const root = document.getElementById('playlistGrid');
+                root.innerHTML = '<div class="pl2-head"><h2>Playlist</h2><button type="button" class="pl2-new" id="pl2New">＋ Nouvelle</button></div>'
+                    + '<div class="pl2-seg"><button type="button" data-t="mine">Mes playlists</button><button type="button" data-t="shared">Partagées</button><button type="button" data-t="artists">Artistes</button></div><div class="pl2-grid" id="pl2Grid"></div>';
+                root.querySelectorAll('.pl2-seg button').forEach(b => { b.classList.toggle('on', b.dataset.t === plTab); b.onclick = () => { plTab = b.dataset.t; buildPlaylistGrid(); }; });
+                root.querySelector('#pl2New').onclick = () => newPlaylistModal();
+                const grid = root.querySelector('#pl2Grid'); grid.classList.toggle('art', plTab === 'artists');
+                const card = (cover, name, sub, fn, round) => { const d = document.createElement('button'); d.type = 'button'; d.className = 'pl2-card'; d.innerHTML = cover + '<b></b><small></small>'; d.querySelector('b').textContent = name; d.querySelector('small').textContent = sub; d.onclick = fn; grid.appendChild(d); return d; };
+                const cta = (txt, btn, fn) => { const d = document.createElement('div'); d.className = 'pl2-empty'; d.innerHTML = '<p></p><button type="button" class="tz-b ok"></button>'; d.querySelector('p').textContent = txt; d.querySelector('button').textContent = btn; d.querySelector('button').onclick = fn; grid.appendChild(d); };
+                if (plTab === 'artists') {
+                    const list = buildArtistPlaylists();
+                    if (!list.length) cta('Pas encore d’artiste avec 3 titres ou plus.', 'Voir les titres', () => { closeSheet(document.getElementById('overlayPlaylists')); openAllTracks(); });
+                    list.forEach(pl => {
+                        const c = card('<div class="pl2-cov round" data-n="' + escH(pl.name) + '">' + escH((pl.name[0] || '?').toUpperCase()) + '</div>', pl.name, pl.tracks.length + ' titres', () => openPlaylist(pl));
+                        const art = c.querySelector('.pl2-cov'), u0 = artistPhotoURL(pl.name);
+                        if (u0) showPic(art, u0); else fetchArtistPhoto(pl.name).then(u => showPic(art, u));
+                    });
+                    return;
+                }
+                if (!cosmicAuthReady) { cta('Connecte-toi pour créer et retrouver tes playlists.', 'Se connecter', () => window.talcoAccount && window.talcoAccount.open()); return; }
+                const list = allPlaylists().filter(p => plTab === 'shared' ? p.shared : !p.shared);
+                if (!list.length) cta(plTab === 'shared' ? 'Aucune playlist partagée pour le moment.' : 'Tu n’as pas encore de playlist. Crée la première !', 'Nouvelle playlist', () => newPlaylistModal());
+                list.forEach(pl => card(plCoverHTML(pl), pl.name, pl.tracks.length + ' titres' + (pl.shared ? ' · partagée' : ''), () => openPlaylist(pl)));
+            }
+            function openPlaylist(i) {
+                const pl = (typeof i === 'object') ? i : allPlaylists()[i];
+                const box = document.getElementById('playlistTracks');
+                document.getElementById('playlistGrid').style.display = 'none'; box.style.display = 'block';
+                const ordered = listOrder(pl.tracks).filter(k => k >= 0 && k < TRACKS.length);
+                box.innerHTML = '<div class="pl2-bar"><button type="button" class="sheet-nav-btn" id="pl2Back" aria-label="Retour"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><span></span><button type="button" class="sheet-nav-btn" id="pl2Close" aria-label="Fermer"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>'
+                    + '<div class="pl2-hero">' + (pl.auto ? '<div class="pl2-cov round big" data-n="' + escH(pl.name) + '">' + escH((pl.name[0] || '?').toUpperCase()) + '</div>' : plCoverHTML(pl).replace('pl2-cov', 'pl2-cov big')) + '<div class="pl2-info"><h2 id="plTitle"></h2><p id="pl2Sub"></p></div></div>'
+                    + '<div class="pl2-acts"><button type="button" class="tz-b ok" id="pl2Play">▶ Lecture</button><button type="button" class="tz-b" id="pl2Shuf">🔀 Aléatoire</button>' + (pl.mine && pl.ref ? '<button type="button" class="tz-b" id="pl2Edit">✏️ Modifier</button><button type="button" class="tz-b" id="pl2Add">＋ Titres</button><button type="button" class="tz-b danger" id="pl2Del">🗑</button>' : '') + '</div><div class="pl2-list" id="plTracksList"></div>';
+                box.querySelector('#plTitle').textContent = pl.name;
+                box.querySelector('#pl2Sub').textContent = ordered.length + ' titre' + (ordered.length > 1 ? 's' : '') + (pl.auto ? ' · artiste' : pl.shared ? ' · partagée' : pl.mine ? ' · perso' : '');
+                if (pl.auto) { const art = box.querySelector('.pl2-cov'), u0 = artistPhotoURL(pl.name); if (u0) showPic(art, u0); else fetchArtistPhoto(pl.name).then(u => showPic(art, u)); }
+                box.querySelector('#pl2Back').onclick = showPlaylistList;
+                box.querySelector('#pl2Close').onclick = () => closeSheet(document.getElementById('overlayPlaylists'));
+                const play = ids => { if (!ids.length) return; activatePlaylist(pl); playFromList(ids, ids[0]); closeSheet(document.getElementById('overlayPlaylists')); };
+                box.querySelector('#pl2Play').onclick = () => play(ordered);
+                box.querySelector('#pl2Shuf').onclick = () => play([...ordered].sort(() => Math.random() - .5));
+                if (pl.mine && pl.ref) {
+                    box.querySelector('#pl2Edit').onclick = () => editPlaylist(pl);
+                    box.querySelector('#pl2Add').onclick = () => { closeSheet(document.getElementById('overlayPlaylists')); openAllTracks(); showToast('Appuie sur ＋ pour ajouter un titre à « ' + pl.name + ' »'); };
+                    box.querySelector('#pl2Del').onclick = async () => { if (confirm('Supprimer la playlist « ' + pl.name + ' » ?')) { await deleteUserPlaylist(pl.id); showPlaylistList(); } };
+                }
+                const list = box.querySelector('#plTracksList');
+                if (!ordered.length) list.innerHTML = '<p class="tz-p" style="text-align:center;padding:1.4rem">Playlist vide. Ajoute des titres avec le bouton ＋.</p>';
+                ordered.forEach((ti, n) => {
+                    const t = TRACKS[ti], d = document.createElement('div');
+                    d.className = 'at-item' + (ti === cur ? ' active' : '');
+                    d.innerHTML = '<div class="at-num">' + (n + 1) + '</div><div class="at-art" data-i="' + ti + '" style="background:' + (t.cover ? coverCSS(t) : gradStr(t)) + '">' + (t.cover ? '' : t.emoji) + '</div><div class="at-info"><div class="at-title"></div><div class="at-artist"></div></div>' + (pl.mine && pl.ref ? '<button type="button" class="at-add rm" title="Retirer de la playlist">✕</button>' : '');
+                    d.querySelector('.at-title').textContent = t.title; d.querySelector('.at-artist').textContent = t.artist;
+                    d.onclick = e => {
+                        if (e.target.closest('.rm')) { e.stopPropagation(); (async () => { const left = pl.tracks.filter(k => k !== ti); try { await pl.ref.update({ trackTitles: left.map(k => TRACKS[k].orig || TRACKS[k].title) }); pl.tracks = left; openPlaylist(pl); } catch (er) { showToast('❌ Modification refusée'); } })(); return; }
+                        activatePlaylist(pl); playFromList(ordered, ti); closeSheet(document.getElementById('overlayPlaylists'));
+                    };
+                    list.appendChild(d);
+                });
+            }
+            // les playlists d'artistes passent par le même écran (marquées « auto »)
+            { const _bap = buildArtistPlaylists; buildArtistPlaylists = function () { return _bap().map(p => Object.assign(p, { auto: true })); }; }
+
+            // ══ BARRE D'ONGLETS flottante (verre) ══
+            (function tabBar() {
+                const I = {
+                    home: '<path d="M3 11l9-8 9 8v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/>',
+                    titles: '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
+                    artists: '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/>',
+                    search: '<circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
+                    playlists: '<line x1="4" y1="6" x2="15" y2="6"/><line x1="4" y1="12" x2="15" y2="12"/><line x1="4" y1="18" x2="10" y2="18"/><path d="M18 17V8l4-1"/><circle cx="16" cy="18" r="2"/>',
+                    settings: '<line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="9" cy="7" r="2.4" fill="var(--bg0,#000)"/><circle cx="15" cy="17" r="2.4" fill="var(--bg0,#000)"/>'
+                };
+                const L = [['home', 'Accueil'], ['titles', 'Titres'], ['artists', 'Artistes'], ['search', 'Recherche'], ['playlists', 'Playlist'], ['settings', 'Paramètres']];
+                const nav = document.createElement('nav'); nav.id = 'tabbar'; nav.setAttribute('aria-label', 'Navigation');
+                nav.innerHTML = L.map(([k, n]) => '<button type="button" data-tab="' + k + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + I[k] + '</svg><span>' + n + '</span></button>').join('');
+                document.body.appendChild(nav);
+                { const mp = document.getElementById('miniPlayer'); if (mp && mp.parentNode !== document.body) document.body.appendChild(mp); }
+                const OV = { overlayAllTracks: 'titles', overlayArtists: 'artists', overlaySearch: 'search', overlayPlaylists: 'playlists' };
+                const current = () => {
+                    const pp = document.getElementById('profPage'); if (pp && !pp.hidden) return 'settings';
+                    for (const id in OV) { const o = document.getElementById(id); if (o && o.classList.contains('active')) return OV[id]; }
+                    return 'home';
+                };
+                const paint = () => { const c = current(); nav.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.tab === c)); };
+                const closeAll = () => {
+                    document.querySelectorAll('.overlay.active').forEach(o => closeSheet(o));
+                    try { closeNowPlaying(); } catch (e) {}
+                    if (window.talcoSettings) window.talcoSettings.close();
+                };
+                window.talcoTab = function (k) {
+                    const was = current();
+                    if (k === 'home') {
+                        closeAll();
+                        if (was === 'home') {
+                            if (activePlaylist) exitPlaylist();
+                            else if (currentSort === 'random') { for (let a = homeRank.length - 1; a > 0; a--) { const j = Math.floor(Math.random() * (a + 1)); [homeRank[a], homeRank[j]] = [homeRank[j], homeRank[a]]; } refreshCentralPanel(); showToast('🔀 Accueil mélangé'); }
+                        }
+                        const m = document.getElementById('mainContent'); if (m && m.scrollTo) m.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else if (k !== was) {
+                        closeAll();
+                        if (k === 'titles') openAllTracks(); else if (k === 'artists') openArtists(); else if (k === 'search') openSearch(); else if (k === 'playlists') openPlaylists(); else if (k === 'settings') window.talcoSettings && window.talcoSettings.open();
+                    }
+                    paint();
+                };
+                nav.addEventListener('click', e => { const b = e.target.closest('button[data-tab]'); if (b) window.talcoTab(b.dataset.tab); });
+                const mo = new MutationObserver(paint);
+                document.querySelectorAll('.overlay').forEach(o => mo.observe(o, { attributes: true, attributeFilter: ['class'] }));
+                window.talcoTabPaint = paint; paint();
+            })();
+            function openSettings() { window.talcoSettings ? window.talcoSettings.open() : window.talcoAccount && window.talcoAccount.open(); }
+
+            window.talcoApplyHome = function () { currentSort = (window.talcoProf && window.talcoProf.rand === false) ? 'title' : 'random'; if (!activePlaylist) { try { refreshCentralPanel(); } catch (e) {} } };
+            if (window.talcoProf && window.talcoProf.rand === false) window.talcoApplyHome();
             // Plus d'auto-play au chargement : ça déclenchait une lecture audio
             // sans geste utilisateur, qui faisait apparaître la notification
             // média du téléphone (verrouillage / centre de contrôle) toute

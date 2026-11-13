@@ -57,3 +57,6 @@ Photos : Deezer puis Wikipédia (cache `talcoArtistPics_v2`). Playlists d'artist
 
 ## Google Search Console
 Deux méthodes de vérification sont en place : le fichier `google55bbd5b30df839a5.html` (copié par le workflow à la racine du site) et la balise `google-site-verification` dans `index.html`. Ensuite, dans Search Console : « Sitemaps » → ajouter `sitemap.xml` (généré automatiquement avec `robots.txt` à chaque déploiement). Données structurées (JSON-LD) : TalcoMusic, GroupeTalco et leurs noms alternatifs (MusiqueTalco, TM, TalcoITN, ITNB Talco…).
+
+## v6 — navigation façon Apple Music
+Barre du bas en verre (Accueil · Titres · Artistes · Recherche · Playlist · Paramètres) + mini-lecteur flottant ; haut de page = logo + bulle du compte ; en 16:9 la liste des musiques est à droite. Paramètres : liquid glass réglable (même sans compte), fond, couleurs, style, compte complet (export, suppression). Titres : bouton ＋ pour ajouter à une playlist. Le calcul de durée totale (409 fichiers préchargés) a été supprimé : c'était la cause principale des ralentissements.
