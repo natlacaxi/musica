@@ -60,3 +60,6 @@ Deux méthodes de vérification sont en place : le fichier `google55bbd5b30df839
 
 ## v6 — navigation façon Apple Music
 Barre du bas en verre (Accueil · Titres · Artistes · Recherche · Playlist · Paramètres) + mini-lecteur flottant ; haut de page = logo + bulle du compte ; en 16:9 la liste des musiques est à droite. Paramètres : liquid glass réglable (même sans compte), fond, couleurs, style, compte complet (export, suppression). Titres : bouton ＋ pour ajouter à une playlist. Le calcul de durée totale (409 fichiers préchargés) a été supprimé : c'était la cause principale des ralentissements.
+
+## v7
+Barre du bas : la pastille suit le doigt (glisser puis relâcher sur un onglet). Mini-lecteur : barre de progression avec poignée et grande zone tactile. Titres : « + » simple, « ⊕ » si déjà dans une playlist. Photos (profil, fond) envoyées sur Cloudinary (préréglage unsigned `talcomusic`, dossier `talcomusic/`), sinon gardées dans le profil. Prénom affiché à côté de la photo. Audit anti-débordement testé de 320 à 430 px.

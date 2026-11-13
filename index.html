@@ -3849,6 +3849,49 @@ html.compact .trow{padding-top:3px!important;padding-bottom:3px!important}html.c
 .pl2-grid.art .pl2-card{align-items:center;text-align:center}
 .pl2-grid.art .pl2-cov{max-width:104px}
 .pl2-grid.art .pl2-cov.round{font-size:1.9rem}
+
+/* ═════ v7 : pastille glissante, « + », prénom, RIEN NE DÉBORDE ═════ */
+html,body{max-width:100%;overflow-x:hidden}
+*,*::before,*::after{box-sizing:border-box}
+img,svg,video,canvas{max-width:100%}
+.main,.overlay .sheet,#profPage,.pf-wrap,.tcx-wrap,.tz-card,.sheet>*{max-width:100%}
+.overlay .sheet{overflow-x:hidden;width:100%}
+.at-info,.mp-info,.tr-t,.tr-a,.pf-row>span,.tz-row>span,.st-acc>span,.pf-sw>span{min-width:0}
+.at-title,.at-artist,.tr-tt,.tr-a,.mp-title,.mp-artist,.pl2-card b,.pf-row b,.st-acc b,.st-acc small,.tz-row b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+input,textarea,select,button{max-width:100%}
+.pl2-hero{flex-wrap:wrap}.pl2-cov.big{width:min(140px,38vw)}
+.pl2-acts .tz-b{flex:1 1 auto}
+.pf-tiles{grid-template-columns:repeat(auto-fill,minmax(68px,1fr))!important}.pf-tiles.wide{grid-template-columns:repeat(auto-fill,minmax(96px,1fr))!important}
+.pf-ems{grid-template-columns:repeat(auto-fill,minmax(40px,1fr))!important}
+.pf-pair{flex-wrap:wrap}.pf-pick{min-width:130px}
+.logo-wrap{min-width:0;flex:1 1 auto}.logo-text{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#tabbar,.mini-player{max-width:min(760px,calc(100vw - 24px))}
+#tabbar button{font-size:clamp(8px,2.55vw,10px)}
+#tabbar{touch-action:none;user-select:none;-webkit-user-select:none}
+.tb-pill{position:absolute;left:0;top:5px;bottom:5px;width:0;border-radius:calc(26px*var(--rad));background:rgba(255,255,255,calc(.2*var(--ga)));box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 8px 20px -8px rgba(0,0,0,.6);pointer-events:none;transition:transform .38s cubic-bezier(.3,1.35,.5,1),width .3s}
+#tabbar button{position:relative;z-index:1}
+#tabbar button.on,#tabbar button.on:hover{background:none!important;box-shadow:none!important}
+#tabbar button.hov{color:#fff}
+#tabbar.dragging{box-shadow:0 24px 60px -12px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.2),inset 0 1px 0 rgba(255,255,255,.35)}
+/* barre de progression du mini-lecteur : grande zone tactile + poignée qui suit le doigt */
+.mini-player .mp-prog-wrap{height:14px!important;bottom:0!important;display:flex;align-items:center;left:20px!important;right:20px!important;pointer-events:none}
+.mini-player .mp-prog{height:4px!important;touch-action:none;position:relative;overflow:visible;pointer-events:auto;flex:1}
+.mini-player .mp-prog::before{content:"";position:absolute;left:-6px;right:-6px;top:-9px;bottom:-4px}
+.mini-player .mp-prog-fill{position:relative;border-radius:4px}
+.mini-player .mp-prog-fill::after{content:"";position:absolute;right:-7px;top:50%;width:14px;height:14px;margin-top:-7px;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.5),0 0 0 3px var(--c1);transform:scale(.85);transition:transform .15s}
+.mini-player .mp-prog:active .mp-prog-fill::after{transform:scale(1.2)}
+/* « + » simple, « ⊕ » entouré si le titre est déjà dans une playlist */
+.at-add{border:1.5px solid transparent!important;background:transparent!important;color:rgba(255,255,255,.85);font-size:1.3rem;transition:.15s}
+.at-add.in{border-color:var(--c2)!important;background:rgba(255,255,255,.1)!important;color:#fff}
+.at-add:hover{background:linear-gradient(135deg,var(--c1),var(--c2))!important;border-color:transparent!important}
+.at-add.rm{font-size:1rem}
+/* prénom à côté de la photo */
+.who-chip,.who-chip[hidden]{width:auto!important;border-radius:100px!important;padding:0 14px 0 4px!important;gap:.55rem;flex:none;max-width:min(52vw,210px)}
+.who-chip.guest{width:44px!important;padding:0!important}
+.who-chip .who-av{flex:none;width:36px;height:36px}
+.who-chip.guest .who-av{width:100%;height:100%}
+.who-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700;font-size:.86rem;color:#fff}
+@media(max-width:480px){.who-name{max-width:84px}.who-chip,.who-chip[hidden]{max-width:44vw}}
 </style>
     <script>
 (function () {
@@ -3887,10 +3930,10 @@ html.compact .trow{padding-top:3px!important;padding-bottom:3px!important}html.c
       ['Droit applicable', 'Droit français. En cas de litige, une solution amiable est recherchée avant toute action ; à défaut, les tribunaux français sont compétents.']] },
     { id: 'priv', ic: '🔒', t: 'Confidentialité', h: 'Confidentialité et données personnelles', a: [
       ['Responsable du traitement', 'GroupeTalco — TalcoAdministration, joignable à <b>talcoitn@gmail.com</b>.'],
-      ['Données concernées', 'Sans compte : uniquement des préférences stockées sur ton appareil. Avec un compte : identifiant technique dérivé de ton code (ton code n’est pas stocké en clair), nom affiché, présentation, avatar, couleurs et fond d’écran, playlists, messages échangés avec l’administrateur.'],
+      ['Données concernées', 'Sans compte : uniquement des préférences stockées sur ton appareil. Avec un compte : identifiant technique dérivé de ton code (ton code n’est pas stocké en clair), prénom, présentation, avatar (hébergé sur Cloudinary si tu importes une photo), couleurs et fond d’écran, playlists, messages échangés avec l’administrateur.'],
       ['Finalités et base légale', 'Faire fonctionner le service et personnaliser l’affichage (exécution du service), assurer la sécurité et modérer les abus (intérêt légitime), mémoriser ton accord (obligation légale). Aucune publicité, aucun profilage, aucune revente.'],
       ['Durée de conservation', 'Données de compte conservées jusqu’à la suppression du compte (par toi ou par l’administration en cas d’abus). Données locales conservées jusqu’à l’effacement de ton navigateur ou le retrait de ton accord.'],
-      ['Destinataires et services tiers', 'Google Firebase (authentification et base de données), Google Fonts (polices), Cloudinary (fichiers audio et images de fond), Apple iTunes Search (pochettes et dates : titre et artiste envoyés), Deezer et Wikipédia (photos d’artistes : nom de l’artiste envoyé), GitHub Pages (hébergement). Ces services reçoivent ton adresse IP. Certains sont situés hors de l’Union européenne (notamment aux États-Unis) et appliquent leurs propres garanties.'],
+      ['Destinataires et services tiers', 'Google Firebase (authentification et base de données), Google Fonts (polices), Cloudinary (fichiers audio, et les photos de profil ou de fond que tu importes), Apple iTunes Search (pochettes et dates : titre et artiste envoyés), Deezer et Wikipédia (photos d’artistes : nom de l’artiste envoyé), GitHub Pages (hébergement). Ces services reçoivent ton adresse IP. Certains sont situés hors de l’Union européenne (notamment aux États-Unis) et appliquent leurs propres garanties.'],
       ['Sécurité', 'Connexion chiffrée (HTTPS), règles d’accès Firestore limitant chaque compte à ses données, accès administrateur restreint. Aucun système n’étant infaillible, choisis un code que tu n’utilises pas ailleurs.'],
       ['Tes droits', 'Accès, rectification, effacement, limitation, opposition, portabilité, retrait du consentement. Tu peux modifier ton profil, exporter tes données et supprimer ton compte toi-même dans Paramètres → Mon compte ; pour toute autre demande, écris à <b>talcoitn@gmail.com</b>. Tu peux aussi saisir la CNIL (cnil.fr).']] },
     { id: 'cook', ic: '🍪', t: 'Cookies', h: 'Cookies et stockage local', intro: 'TalcoMusic n’utilise <b>aucun cookie publicitaire ni de mesure d’audience</b>. Il enregistre uniquement des données techniques dans le stockage local de ton navigateur. Tu peux les effacer à tout moment ou retirer ton accord.', ck: [
@@ -4074,6 +4117,20 @@ html.compact .trow{padding-top:3px!important;padding-bottom:3px!important}html.c
           var AVS = ['🎧', '🎵', '🎤', '🎸', '🎹', '🥁', '🔥', '🌙', '⚡', '💜', '🦄', '🐺', '🚀', '🌴', '👾', '😎'];
           var IMGOK = /^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/;
           var HEX = /^#[0-9a-fA-F]{6}$/;
+          // Import automatique sur Cloudinary (préréglage « unsigned » nommé talcomusic) ; sinon l'image reste dans le profil
+          var CLD = { cloud: 'tbmdciyv', preset: 'talcomusic' };
+          var CLD_OK = /^https:\/\/res\.cloudinary\.com\/tbmdciyv\/image\/upload\/[A-Za-z0-9_\-\/.%,]+$/;
+          var imgOK = function (v) { return typeof v === 'string' && (IMGOK.test(v) || CLD_OK.test(v)); };
+          function uploadCld(dataUrl, kind) {
+            var fd = new FormData(); fd.append('file', dataUrl); fd.append('upload_preset', CLD.preset); fd.append('folder', 'talcomusic/' + kind);
+            return fetch('https://api.cloudinary.com/v1_1/' + CLD.cloud + '/image/upload', { method: 'POST', body: fd })
+              .then(function (r) { if (!r.ok) throw new Error('cld ' + r.status); return r.json(); })
+              .then(function (j) {
+                var tr = kind === 'avatars' ? 'c_fill,g_face,w_240,h_240,q_auto,f_auto' : 'c_limit,w_1600,q_auto,f_auto';
+                var u = String(j.secure_url || '').replace('/image/upload/', '/image/upload/' + tr + '/');
+                if (!CLD_OK.test(u)) throw new Error('url'); return u;
+              });
+          }
           var PTITLE = { home: 'Paramètres', acc: 'Mon compte', bg: 'Fond d’écran', col: 'Couleurs', ui: 'Style', play: 'Accueil & lecture' };
           var defProf = function () { return { name: '', bio: '', av: '🎧', avImg: '', c: 0, c1: '#8b7bff', c2: '#ff4fa3', w: 0, wc1: '#1b1038', wc2: '#050507', wa: 160, img: '', dim: 55, gb: 34, ga: 100, font: 'Inter', rad: 100, anim: true, rand: true, compact: false }; };
           var prof = defProf(), saveT = null, panel = 'home', lastRand = true;
@@ -4083,7 +4140,7 @@ html.compact .trow{padding-top:3px!important;padding-bottom:3px!important}html.c
             var c1 = prof.c >= 0 ? (COLORS[prof.c] || COLORS[0])[0] : (HEX.test(prof.c1) ? prof.c1 : '#8b7bff');
             var c2 = prof.c >= 0 ? (COLORS[prof.c] || COLORS[0])[1] : (HEX.test(prof.c2) ? prof.c2 : '#ff4fa3');
             var wall = '';
-            if (prof.img && IMGOK.test(prof.img)) wall = 'linear-gradient(rgba(5,5,8,' + (prof.dim / 100) + '),rgba(5,5,8,' + Math.min(.95, prof.dim / 100 + .2) + ')),url(' + prof.img + ') center/cover no-repeat';
+            if (prof.img && imgOK(prof.img)) wall = 'linear-gradient(rgba(5,5,8,' + (prof.dim / 100) + '),rgba(5,5,8,' + Math.min(.95, prof.dim / 100 + .2) + ')),url("' + prof.img + '") center/cover no-repeat';
             else if (prof.w === -1 && HEX.test(prof.wc1) && HEX.test(prof.wc2)) wall = 'linear-gradient(' + (+prof.wa || 0) + 'deg,' + prof.wc1 + ',' + prof.wc2 + ')';
             else if (WALLS[prof.w]) wall = WALLS[prof.w];
             var font = FONTS.indexOf(prof.font) >= 0 ? prof.font : 'Inter';
@@ -4095,18 +4152,18 @@ html.compact .trow{padding-top:3px!important;padding-bottom:3px!important}html.c
             if (lastRand !== (prof.rand !== false)) { lastRand = prof.rand !== false; if (window.talcoApplyHome) window.talcoApplyHome(); }
             var who = $('talcoWho'), u = window._talcoUser;
             if (who) {
-              who.hidden = false; who.textContent = '';
+              who.hidden = false; who.textContent = ''; who.classList.toggle('guest', !u);
               var av = document.createElement('span'); av.className = 'who-av';
-              if (u && prof.avImg && IMGOK.test(prof.avImg)) av.style.backgroundImage = 'url(' + prof.avImg + ')';
+              if (u && prof.avImg && imgOK(prof.avImg)) av.style.backgroundImage = 'url("' + prof.avImg + '")';
               else av.textContent = u ? (prof.av || '🎧') : '👤';
-              who.appendChild(av); who.setAttribute('aria-label', u ? (prof.name || 'Mon compte') : 'Se connecter'); who.title = u ? (prof.name || 'Mon compte') : 'Se connecter';
+              who.appendChild(av); { var fn = u ? String(prof.name || '').trim().split(/\s+/)[0] : ''; if (fn) { var nm = document.createElement('span'); nm.className = 'who-name'; nm.textContent = fn; who.appendChild(nm); } } who.setAttribute('aria-label', u ? (prof.name || 'Mon compte') : 'Se connecter'); who.title = u ? (prof.name || 'Mon compte') : 'Se connecter';
             }
           }
           function drawHero() {
             var a = $('stAv'); if (!a) return;
             var u = window._talcoUser; a.textContent = ''; a.style.backgroundImage = '';
-            if (u && prof.avImg && IMGOK.test(prof.avImg)) a.style.backgroundImage = 'url(' + prof.avImg + ')'; else a.textContent = u ? (prof.av || '🎧') : '👤';
-            $('stName').textContent = u ? (prof.name || 'Ton nom') : 'Se connecter';
+            if (u && prof.avImg && imgOK(prof.avImg)) a.style.backgroundImage = 'url("' + prof.avImg + '")'; else a.textContent = u ? (prof.av || '🎧') : '👤';
+            $('stName').textContent = u ? (prof.name || 'Ton prénom') : 'Se connecter';
             $('stSub').textContent = u ? (window.talcoAdmin ? '★ Administrateur · gérer mon compte' : (prof.bio || 'Gérer mon compte')) : 'Playlists, profil et messages sur tous tes appareils';
             $('acHello').textContent = 'Connecté ✓' + (prof.name ? ' — ' + prof.name : '');
             $('aIn').hidden = !u; $('aOut').hidden = !!u;
@@ -4149,13 +4206,19 @@ html.compact .trow{padding-top:3px!important;padding-bottom:3px!important}html.c
             }).catch(function () {});
           }
           function photo(file, size, crop, cb) {
-            var im = new Image(), url = URL.createObjectURL(file);
+            var kind = crop ? 'avatars' : 'fonds', im = new Image(), url = URL.createObjectURL(file);
             im.onload = function () {
-              var cv = document.createElement('canvas'), s;
-              if (crop) { cv.width = cv.height = size; var m = Math.min(im.width, im.height); cv.getContext('2d').drawImage(im, (im.width - m) / 2, (im.height - m) / 2, m, m, 0, 0, size, size); }
-              else { s = Math.min(1, size / Math.max(im.width, im.height)); cv.width = Math.round(im.width * s); cv.height = Math.round(im.height * s); cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height); }
-              var q = .75, d = cv.toDataURL('image/jpeg', q); while (d.length > (crop ? 60000 : 600000) && q > .3) { q -= .1; d = cv.toDataURL('image/jpeg', q); }
-              URL.revokeObjectURL(url); cb(d);
+              var render = function (sz) {
+                var cv = document.createElement('canvas');
+                if (crop) { cv.width = cv.height = sz; var m = Math.min(im.width, im.height); cv.getContext('2d').drawImage(im, (im.width - m) / 2, (im.height - m) / 2, m, m, 0, 0, sz, sz); }
+                else { var s = Math.min(1, sz / Math.max(im.width, im.height)); cv.width = Math.round(im.width * s); cv.height = Math.round(im.height * s); cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height); }
+                return cv;
+              };
+              var big = render(crop ? 400 : 1600).toDataURL('image/jpeg', .86);
+              var q = .75, d = render(size).toDataURL('image/jpeg', q); while (d.length > (crop ? 60000 : 600000) && q > .3) { q -= .1; d = render(size).toDataURL('image/jpeg', q); }
+              URL.revokeObjectURL(url); pmsg('Envoi de l’image…');
+              uploadCld(big, kind).then(function (u) { pmsg('✓ Image envoyée sur Cloudinary', true); cb(u); })
+                .catch(function () { pmsg('Cloudinary indisponible : image gardée dans ton profil'); cb(d); });
             };
             im.onerror = function () { pmsg('Image illisible.'); }; im.src = url;
           }
@@ -4214,7 +4277,7 @@ html.compact .trow{padding-top:3px!important;padding-bottom:3px!important}html.c
               + '</div>'
               + '<div class="pf-panel" data-p="acc" hidden>'
               +   '<div id="aOut"><div class="st-note"><b>Pas encore de compte ?</b><p>Crée-en un en 10 secondes avec un code à 6 chiffres : tes playlists, ton profil et tes réglages te suivent sur tous tes appareils.</p></div><button type="button" class="pf-btn" id="aLogin">Se connecter / créer un compte</button></div>'
-              +   '<div id="aIn" hidden><label class="pf-f"><span>Nom affiché</span><input id="pName" maxlength="24" placeholder="Ton nom"></label><label class="pf-f"><span>Présentation</span><input id="pBio" maxlength="80" placeholder="Une phrase sur toi"></label><div class="pf-h">Avatar</div><div class="pf-ems" id="pAvs"></div><label class="pf-btn ghost">📷 Importer ma photo<input type="file" id="pAvFile" accept="image/*" hidden></label>'
+              +   '<div id="aIn" hidden><label class="pf-f"><span>Prénom</span><input id="pName" maxlength="24" placeholder="Ton prénom"></label><label class="pf-f"><span>Présentation</span><input id="pBio" maxlength="80" placeholder="Une phrase sur toi"></label><div class="pf-h">Avatar</div><div class="pf-ems" id="pAvs"></div><label class="pf-btn ghost">📷 Importer ma photo<input type="file" id="pAvFile" accept="image/*" hidden></label>'
               +   '<div class="pf-h">Gérer mon compte</div>' + row('pPl', '🎵', 'Mes playlists', 'Créer, partager, personnaliser') + row('pMsg', '💬', 'Messagerie avec l’administrateur', 'Écrire, lire les réponses') + row('pExport', '📦', 'Exporter mes données', 'Télécharger profil, playlists, messages') + row('pOut', '🚪', 'Se déconnecter', 'Tu pourras te reconnecter avec ton code') + '<div class="pf-h danger">Zone sensible</div>' + row('pDel', '🗑', 'Supprimer mon compte', 'Efface profil, playlists et messages', 'danger') + '</div>'
               + '</div>'
               + '<div class="pf-panel" data-p="bg" hidden><div class="pf-h">Fonds</div><div class="pf-tiles wide" id="pWalls"></div><div class="pf-h">Dégradé personnalisé</div><div class="pf-pair"><label class="pf-pick"><input type="color" id="pW1"><span>Couleur A</span></label><label class="pf-pick"><input type="color" id="pW2"><span>Couleur B</span></label></div>' + rg('Angle', 'pWa', 0, 360).replace('<b id="pWaV"></b>', '') + '<div class="pf-h">Ma photo</div><label class="pf-btn ghost">📷 Choisir une photo de fond<input type="file" id="pWallFile" accept="image/*" hidden></label>' + rg('Assombrir la photo', 'pDim', 0, 90) + '</div>'
@@ -8085,7 +8148,7 @@ const TRACKS = [
                 const mk = (ico, name, sub, fn, on) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'tz-row' + (on ? ' on' : ''); b.innerHTML = '<i></i><span><b></b><small></small></span><em>' + (on ? '✓' : '＋') + '</em>'; b.querySelector('i').textContent = ico; b.querySelector('b').textContent = name; b.querySelector('small').textContent = sub; b.onclick = fn; box.appendChild(b); return b; };
                 mk('✨', 'Nouvelle playlist', 'Créer et y ajouter ce titre', () => { m.remove(); newPlaylistModal(i); });
                 mine.forEach(pl => mk(pl.emoji || '⭐', pl.name, pl.tracks.length + ' titres' + (pl.shared ? ' · partagée' : ''), async function () {
-                    try { const ok = await addTrackToPlaylist(pl, i); showToast(ok ? '✅ Ajouté à « ' + pl.name + ' »' : 'Déjà dans « ' + pl.name + ' »'); m.remove(); } catch (e) { showToast('❌ Ajout refusé'); }
+                    try { const ok = await addTrackToPlaylist(pl, i); refreshAddMarks(); showToast(ok ? '✅ Ajouté à « ' + pl.name + ' »' : 'Déjà dans « ' + pl.name + ' »'); m.remove(); } catch (e) { showToast('❌ Ajout refusé'); }
                 }, pl.tracks.includes(i)));
             }
             document.getElementById('allTracksList').addEventListener('click', e => {
@@ -8199,7 +8262,7 @@ const TRACKS = [
                 };
                 const L = [['home', 'Accueil'], ['titles', 'Titres'], ['artists', 'Artistes'], ['search', 'Recherche'], ['playlists', 'Playlist'], ['settings', 'Paramètres']];
                 const nav = document.createElement('nav'); nav.id = 'tabbar'; nav.setAttribute('aria-label', 'Navigation');
-                nav.innerHTML = L.map(([k, n]) => '<button type="button" data-tab="' + k + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + I[k] + '</svg><span>' + n + '</span></button>').join('');
+                nav.innerHTML = '<span class="tb-pill"></span>' + L.map(([k, n]) => '<button type="button" data-tab="' + k + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + I[k] + '</svg><span>' + n + '</span></button>').join('');
                 document.body.appendChild(nav);
                 { const mp = document.getElementById('miniPlayer'); if (mp && mp.parentNode !== document.body) document.body.appendChild(mp); }
                 const OV = { overlayAllTracks: 'titles', overlayArtists: 'artists', overlaySearch: 'search', overlayPlaylists: 'playlists' };
@@ -8208,7 +8271,14 @@ const TRACKS = [
                     for (const id in OV) { const o = document.getElementById(id); if (o && o.classList.contains('active')) return OV[id]; }
                     return 'home';
                 };
-                const paint = () => { const c = current(); nav.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.tab === c)); };
+                const pill = nav.querySelector('.tb-pill');
+                const btns = () => [...nav.querySelectorAll('button[data-tab]')];
+                const place = (btn, animate) => {
+                    if (!btn) return; const nr = nav.getBoundingClientRect(), br = btn.getBoundingClientRect();
+                    pill.style.transition = animate === false ? 'none' : ''; pill.style.width = br.width + 'px';
+                    pill.style.transform = 'translateX(' + (br.left - nr.left - nav.clientLeft) + 'px)';
+                };
+                const paint = () => { const c = current(); btns().forEach(b => b.classList.toggle('on', b.dataset.tab === c)); place(nav.querySelector('button.on')); };
                 const closeAll = () => {
                     document.querySelectorAll('.overlay.active').forEach(o => closeSheet(o));
                     try { closeNowPlaying(); } catch (e) {}
@@ -8233,9 +8303,38 @@ const TRACKS = [
                 const mo = new MutationObserver(paint);
                 document.querySelectorAll('.overlay').forEach(o => mo.observe(o, { attributes: true, attributeFilter: ['class'] }));
                 window.talcoTabPaint = paint; paint();
+                addEventListener('resize', () => place(nav.querySelector('button.on'), false)); addEventListener('orientationchange', () => setTimeout(() => place(nav.querySelector('button.on'), false), 250));
+                // glisser le doigt sur la barre : la pastille suit, et on arrive sur l'onglet relâché
+                let drag = null;
+                nav.addEventListener('pointerdown', e => { const b = e.target.closest('button[data-tab]'); if (b) drag = { x0: e.clientX, id: e.pointerId, moved: false, over: b }; });
+                nav.addEventListener('pointermove', e => {
+                    if (!drag || e.pointerId !== drag.id) return;
+                    if (!drag.moved) { if (Math.abs(e.clientX - drag.x0) < 7) return; drag.moved = true; try { nav.setPointerCapture(e.pointerId); } catch (er) {} nav.classList.add('dragging'); }
+                    const nr = nav.getBoundingClientRect(), pw = pill.offsetWidth;
+                    const x = Math.min(nr.right - 3, Math.max(nr.left + 3, e.clientX));
+                    pill.style.transition = 'none';
+                    pill.style.transform = 'translateX(' + Math.min(nav.clientWidth - pw, Math.max(0, e.clientX - nr.left - nav.clientLeft - pw / 2)) + 'px) scale(1.07)';
+                    const over = btns().find(b => { const r = b.getBoundingClientRect(); return x >= r.left && x < r.right; }) || drag.over;
+                    if (over !== drag.over) { drag.over = over; if (navigator.vibrate) { try { navigator.vibrate(8); } catch (er) {} } }
+                    btns().forEach(b => b.classList.toggle('hov', b === over));
+                });
+                const endDrag = e => {
+                    if (!drag || e.pointerId !== drag.id) return;
+                    const d = drag; drag = null; nav.classList.remove('dragging'); btns().forEach(b => b.classList.remove('hov'));
+                    try { nav.releasePointerCapture(e.pointerId); } catch (er) {}
+                    if (d.moved && e.type !== 'pointercancel') { pill.style.transition = ''; window.talcoTab(d.over.dataset.tab); }
+                    paint();
+                };
+                nav.addEventListener('pointerup', endDrag); nav.addEventListener('pointercancel', endDrag);
             })();
             function openSettings() { window.talcoSettings ? window.talcoSettings.open() : window.talcoAccount && window.talcoAccount.open(); }
 
+            function refreshAddMarks() {
+                const set = new Set(); userPlaylists.forEach(p => { if (p.mine) p.tracks.forEach(k => set.add(k)); });
+                document.querySelectorAll('.at-add[data-i]:not(.rm)').forEach(b => { const on = set.has(+b.dataset.i); b.classList.toggle('in', on); b.title = on ? 'Déjà dans une playlist — ajouter aussi à une autre' : 'Ajouter à une playlist'; });
+            }
+            { const _lup = loadUserPlaylists; loadUserPlaylists = async function () { await _lup(); refreshAddMarks(); }; }
+            new MutationObserver(() => refreshAddMarks()).observe(document.getElementById('allTracksList'), { childList: true });
             window.talcoApplyHome = function () { currentSort = (window.talcoProf && window.talcoProf.rand === false) ? 'title' : 'random'; if (!activePlaylist) { try { refreshCentralPanel(); } catch (e) {} } };
             if (window.talcoProf && window.talcoProf.rand === false) window.talcoApplyHome();
             // Plus d'auto-play au chargement : ça déclenchait une lecture audio
